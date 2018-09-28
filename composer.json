@@ -1,0 +1,13 @@
+{
+    "name": "tgerbet/babelfish",
+    "description": "A file programming language detector",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Gerbet",
+            "email": "thomas@gerbet.me"
+        }
+    ],
+    "require": {}
+}
