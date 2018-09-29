@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Babelfish\Internal;
 
+use Babelfish\Internal\Generator\Generator;
+
 class Dump
 {
     /**

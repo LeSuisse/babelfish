@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Babelfish\Internal;
+namespace Babelfish\Internal\Generator;
 
-final class AliasGenerator implements Generator
+final class Alias implements Generator
 {
     public function linguistInputFile(): string
     {
