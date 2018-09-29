@@ -12,13 +12,22 @@ class LanguageTest extends TestCase
     /**
      * @dataProvider aliasesProvider
      */
-    public function testFindByAliases(string $expected_language_name, string $alias): void
+    public function testFindByAlias(?string $expected_language_name, string $alias): void
     {
         $language = Language::findByAlias($alias);
-        $this->assertSame($expected_language_name, $language->getName());
+        $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
     }
 
-    public function aliasesProvider()
+    /**
+     * @dataProvider filenamesProvider
+     */
+    public function testFindByFilename(?string $expected_language_name, string $filename): void
+    {
+        $language = Language::findByFilename($filename);
+        $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
+    }
+
+    public function aliasesProvider(): array
     {
         return [
             ['ASP', 'asp'],
@@ -83,11 +92,25 @@ class LanguageTest extends TestCase
             ['X BitMap', 'xbm'],
             ['X PixMap', 'xpm'],
             ['YAML', 'yml'],
+            [null, 'do_not_exist']
         ];
     }
 
-    public function testNotExistingAliasDoesNotFindALanguage(): void
+    public function filenamesProvider(): array
     {
-        $this->assertNull(Language::findByAlias('do_not_exist'));
+        return [
+            ['Shell', 'PKGBUILD'],
+            ['Ruby', 'Rakefile'],
+            ['ApacheConf', 'httpd.conf'],
+            ['ApacheConf', '.htaccess'],
+            ['Nginx', 'nginx.conf'],
+            [null, 'foo.rb'],
+            [null, 'rb'],
+            [null, '.null'],
+            ['Shell', '.bashrc'],
+            ['Shell', 'bash_profile'],
+            ['Shell', '.zshrc'],
+            ['Clojure', 'riemann.config'],
+        ];
     }
 }

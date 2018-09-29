@@ -33,4 +33,17 @@ class Language
         }
         return new self($language_name);
     }
+
+    public static function findByFilename(string $filename): ?self
+    {
+        static $languages_indexed_by_filename = null;
+        if ($languages_indexed_by_filename === null) {
+            $languages_indexed_by_filename = include __DIR__ . '/Data/Filenames.php';
+        }
+        $language_name = $languages_indexed_by_filename[$filename] ?? null;
+        if ($language_name === null) {
+            return null;
+        }
+        return new self($language_name);
+    }
 }
