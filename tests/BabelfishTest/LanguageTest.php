@@ -27,6 +27,15 @@ class LanguageTest extends TestCase
         $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
     }
 
+    /**
+     * @dataProvider interpretersProvider
+     */
+    public function testFindByInterpreter(?string $expected_language_name, string $interpreter): void
+    {
+        $language = Language::findByInterpreter($interpreter);
+        $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
+    }
+
     public function aliasesProvider(): array
     {
         return [
@@ -111,6 +120,22 @@ class LanguageTest extends TestCase
             ['Shell', 'bash_profile'],
             ['Shell', '.zshrc'],
             ['Clojure', 'riemann.config'],
+        ];
+    }
+
+    public function interpretersProvider(): array
+    {
+        return [
+            ['Ruby', 'ruby'],
+            ['R', 'Rscript'],
+            ['Shell', 'sh'],
+            ['Shell', 'bash'],
+            ['Python', 'python'],
+            ['Python', 'python2'],
+            ['Python', 'python3'],
+            ['Common Lisp', 'sbcl'],
+            ['SuperCollider', 'sclang'],
+            [null, 'unknown_interpreter'],
         ];
     }
 }

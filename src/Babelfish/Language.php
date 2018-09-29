@@ -46,4 +46,17 @@ class Language
         }
         return new self($language_name);
     }
+
+    public static function findByInterpreter(string $interpreter): ?self
+    {
+        static $languages_indexed_by_interpreter = null;
+        if ($languages_indexed_by_interpreter === null) {
+            $languages_indexed_by_interpreter = include __DIR__ . '/Data/Interpreters.php';
+        }
+        $language_name = $languages_indexed_by_interpreter[$interpreter] ?? null;
+        if ($language_name === null) {
+            return null;
+        }
+        return new self($language_name);
+    }
 }

@@ -7,6 +7,7 @@ use Babelfish\Internal\Generator\Alias;
 use Babelfish\Internal\DataDumper;
 use Babelfish\Internal\Dump;
 use Babelfish\Internal\Generator\Filename;
+use Babelfish\Internal\Generator\Interpreter;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -18,6 +19,10 @@ $data_dumper = new DataDumper(
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Filenames.php',
         new Filename
+    ),
+    new Dump(
+        __DIR__ . '/../src/Babelfish/Data/Interpreters.php',
+        new Interpreter
     )
 );
 $data_dumper->dump(__DIR__ . '/../linguist/');
