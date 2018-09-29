@@ -1,2 +1,5 @@
 vendor/
 .idea/
+composer.lock
+linguist/
+src/Babelfish/Data/
