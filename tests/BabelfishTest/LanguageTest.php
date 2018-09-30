@@ -36,6 +36,19 @@ class LanguageTest extends TestCase
         $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
     }
 
+    /**
+     * @dataProvider extensionsProvider
+     */
+    public function testFindLanguagesByExtension(array $expected_languages_name, string $extension): void
+    {
+        $languages = Language::findLanguagesByExtension($extension);
+        $names = [];
+        foreach ($languages as $language) {
+            $names[] = $language->getName();
+        }
+        $this->assertEquals($expected_languages_name, $names);
+    }
+
     public function aliasesProvider(): array
     {
         return [
@@ -136,6 +149,18 @@ class LanguageTest extends TestCase
             ['Common Lisp', 'sbcl'],
             ['SuperCollider', 'sclang'],
             [null, 'unknown_interpreter'],
+        ];
+    }
+
+    public function extensionsProvider(): array
+    {
+        return [
+            [['Ruby'], '.rb'],
+            [['HTML+Django'], '.jinja'],
+            [['C', 'C++', 'Objective-C'], '.h'],
+            [['Limbo', 'M', 'MUF', 'Mathematica', 'Matlab', 'Mercury', 'Objective-C'], '.m'],
+            [[], '.null'],
+            [[], 'F.I.L.E.'],
         ];
     }
 }

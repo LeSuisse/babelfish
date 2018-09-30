@@ -59,4 +59,21 @@ class Language
         }
         return new self($language_name);
     }
+
+    /**
+     * @return self[]
+     */
+    public static function findLanguagesByExtension(string $extension): array
+    {
+        static $languages_indexed_by_extension = null;
+        if ($languages_indexed_by_extension === null) {
+            $languages_indexed_by_extension = include __DIR__ . '/Data/Extensions.php';
+        }
+        $languages_name = $languages_indexed_by_extension[$extension] ?? [];
+        $languages = [];
+        foreach ($languages_name as $language_name) {
+            $languages[] = new self($language_name);
+        }
+        return $languages;
+    }
 }
