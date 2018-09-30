@@ -69,7 +69,7 @@ class Language
         if ($languages_indexed_by_extension === null) {
             $languages_indexed_by_extension = include __DIR__ . '/Data/Extensions.php';
         }
-        $languages_name = $languages_indexed_by_extension[$extension] ?? [];
+        $languages_name = $languages_indexed_by_extension[strtolower($extension)] ?? [];
         $languages = [];
         foreach ($languages_name as $language_name) {
             $languages[] = new self($language_name);
