@@ -30,10 +30,14 @@ class LanguageTest extends TestCase
     /**
      * @dataProvider interpretersProvider
      */
-    public function testFindByInterpreter(?string $expected_language_name, string $interpreter): void
+    public function testFindByInterpreter(array $expected_languages_name, string $interpreter): void
     {
-        $language = Language::findByInterpreter($interpreter);
-        $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
+        $languages = Language::findLanguagesByInterpreter($interpreter);
+        $names = [];
+        foreach ($languages as $language) {
+            $names[] = $language->getName();
+        }
+        $this->assertEquals($expected_languages_name, $names);
     }
 
     /**
@@ -139,16 +143,17 @@ class LanguageTest extends TestCase
     public function interpretersProvider(): array
     {
         return [
-            ['Ruby', 'ruby'],
-            ['R', 'Rscript'],
-            ['Shell', 'sh'],
-            ['Shell', 'bash'],
-            ['Python', 'python'],
-            ['Python', 'python2'],
-            ['Python', 'python3'],
-            ['Common Lisp', 'sbcl'],
-            ['SuperCollider', 'sclang'],
-            [null, 'unknown_interpreter'],
+            [['Ruby'], 'ruby'],
+            [['R'], 'Rscript'],
+            [['Shell'], 'sh'],
+            [['Shell'], 'bash'],
+            [['Python'], 'python'],
+            [['Python'], 'python2'],
+            [['Python'], 'python3'],
+            [['Common Lisp'], 'sbcl'],
+            [['SuperCollider'], 'sclang'],
+            [['Perl', 'Pod'], 'perl'],
+            [[], 'unknown_interpreter'],
         ];
     }
 

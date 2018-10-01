@@ -20,7 +20,7 @@ final class Interpreter implements Generator
                 continue;
             }
             foreach ($attributes['interpreters'] as $interpreter) {
-                $exported_interpreter[$interpreter] = $name;
+                $exported_interpreter[$interpreter][] = $name;
             }
         }
 

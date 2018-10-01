@@ -53,13 +53,7 @@ class Shebang implements Strategy
             $script = $exec_matches[1];
         }
 
-        $language = Language::findByInterpreter($script);
-
-        if ($language === null) {
-            return [];
-        }
-
-        return [$language];
+        return Language::findLanguagesByInterpreter($script);
     }
 
     private function getHeaderForMultilineExec(SourceFile $file): string

@@ -59,7 +59,7 @@ class ShebangTest extends TestCase
             [['Python'], "#!/bin/python\n# foo\n# bar\n# baz"],
             [['Python'], "#!/usr/bin/python2.7\n\n\n\n"],
             [['Common Lisp'], "#!/usr/bin/sbcl --script\n\n"],
-            [['Pod'], '#! perl'], // Could be Perl too
+            [['Perl', 'Pod'], '#! perl'],
             [['Ruby'], "#!/bin/sh\n\n\nexec ruby $0 $@"],
             [['Shell'], '#! /usr/bin/env A=003 B=149 C=150 D=xzd E=base64 F=tar G=gz H=head I=tail sh'],
         ];
