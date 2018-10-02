@@ -7,7 +7,7 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 
-class Shebang implements Strategy
+final class Shebang implements Strategy
 {
     private const SEARCH_SCOPE_FOR_MULTILINE_EXEC = 5;
 
