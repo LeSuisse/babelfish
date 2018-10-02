@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace BabelfishTest\Strategy;
 
 use Babelfish\File\SourceFile;
+use Babelfish\Language;
+use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 use Babelfish\Strategy\Modeline;
 use BabelfishTest\LinguistData;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +20,14 @@ class ModelineTest extends TestCase
     {
         $source_file = LinguistData::getFixtureSourceFile($linguist_fixture_path);
 
-        $modeline = new Modeline();
+        $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        $pass_out_filter->method('filter')->willReturnCallback(
+            function (array $language_candidates, Language ...$found_languages) {
+                return $found_languages;
+            }
+        );
+
+        $modeline = new Modeline($pass_out_filter);
         $languages = $modeline->getLanguages($source_file);
 
         $this->assertCount(1, $languages);
@@ -27,7 +36,8 @@ class ModelineTest extends TestCase
 
     public function testSourceFileWithoutModelineInTheHeaderOrFooter(): void
     {
-        $modeline = new Modeline();
+        $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        $modeline = new Modeline($filter);
         $languages = $modeline->getLanguages(LinguistData::getSampleSourceFile('C/main.c'));
 
         $this->assertEmpty($languages);
@@ -35,7 +45,8 @@ class ModelineTest extends TestCase
 
     public function testNoLanguageIsReturnedWhenAliasGivenInTheModelineIsNotFound(): void
     {
-        $modeline = new Modeline();
+        $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        $modeline = new Modeline($filter);
 
         $file = $this->createMock(SourceFile::class);
         $file->method('getLines')->willReturn(['/* vim: set filetype=not_known: */']);

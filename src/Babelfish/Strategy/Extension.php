@@ -6,9 +6,19 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
+use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 
 final class Extension implements Strategy
 {
+    /**
+     * @var OnlyKeepLanguageAlreadyCandidatesFilter
+     */
+    private $filter;
+
+    public function __construct(OnlyKeepLanguageAlreadyCandidatesFilter $filter)
+    {
+        $this->filter = $filter;
+    }
     /**
      * @return Language[]
      */
@@ -25,10 +35,11 @@ final class Extension implements Strategy
             $composite_extension = ".$second_extension_part.$extension";
             $languages = Language::findLanguagesByExtension($composite_extension);
             if (! empty($languages)) {
-                return $languages;
+                return $this->filter->filter($language_candidates, ...$languages);
             }
         }
 
-        return Language::findLanguagesByExtension(".$extension");
+        $languages = Language::findLanguagesByExtension(".$extension");
+        return $this->filter->filter($language_candidates, ...$languages);
     }
 }

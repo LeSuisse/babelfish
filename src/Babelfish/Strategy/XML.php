@@ -16,6 +16,10 @@ final class XML implements Strategy
      */
     public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
+        if (! empty($language_candidates)) {
+            return $language_candidates;
+        }
+
         $header = \implode('', \array_slice($file->getLines(), 0, self::SEARCH_SCOPE));
 
         if (strpos($header, '<?xml version=') !== false) {

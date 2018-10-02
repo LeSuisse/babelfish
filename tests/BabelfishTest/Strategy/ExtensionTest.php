@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace BabelfishTest\Strategy;
 
 use Babelfish\File\SourceFile;
+use Babelfish\Language;
 use Babelfish\Strategy\Extension;
+use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 use PHPUnit\Framework\TestCase;
 
 class ExtensionTest extends TestCase
@@ -18,7 +20,14 @@ class ExtensionTest extends TestCase
         $source_file = $this->createMock(SourceFile::class);
         $source_file->method('getName')->willReturn($filename);
 
-        $strategy = new Extension();
+        $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        $pass_out_filter->method('filter')->willReturnCallback(
+            function (array $language_candidates, Language ...$found_languages) {
+                return $found_languages;
+            }
+        );
+
+        $strategy = new Extension($pass_out_filter);
         $languages = $strategy->getLanguages($source_file);
 
         if ($language_name === null) {

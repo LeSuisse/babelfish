@@ -6,10 +6,20 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
+use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 
 final class Shebang implements Strategy
 {
     private const SEARCH_SCOPE_FOR_MULTILINE_EXEC = 5;
+    /**
+     * @var OnlyKeepLanguageAlreadyCandidatesFilter
+     */
+    private $filter;
+
+    public function __construct(OnlyKeepLanguageAlreadyCandidatesFilter $filter)
+    {
+        $this->filter = $filter;
+    }
 
     /**
      * @return Language[]
@@ -53,7 +63,7 @@ final class Shebang implements Strategy
             $script = $exec_matches[1];
         }
 
-        return Language::findLanguagesByInterpreter($script);
+        return $this->filter->filter($language_candidates, ...Language::findLanguagesByInterpreter($script));
     }
 
     private function getHeaderForMultilineExec(SourceFile $file): string

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BabelfishTest\Strategy;
 
 use Babelfish\File\SourceFile;
+use Babelfish\Language;
 use Babelfish\Strategy\XML;
 use BabelfishTest\LinguistData;
 use PHPUnit\Framework\TestCase;
@@ -47,5 +48,17 @@ class XMLTest extends TestCase
             [true, LinguistData::getFixtureSourceFile('XML/app.config')],
             [true, LinguistData::getFixtureSourceFile('XML/AssertionIDRequestOptionalAttributes.xml.svn-base')],
         ];
+    }
+
+    public function testDoNotTryToDetectXMLWhenLanguageCandidatesExist(): void
+    {
+        $language_candidates = [$this->createMock(Language::class), $this->createMock(Language::class)];
+        $strategy = new XML();
+        $detected_languages = $strategy->getLanguages(
+            $this->createMock(SourceFile::class),
+            ...$language_candidates
+        );
+
+        $this->assertSame($language_candidates, $detected_languages);
     }
 }

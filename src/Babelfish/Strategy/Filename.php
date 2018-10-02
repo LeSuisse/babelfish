@@ -6,9 +6,20 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
+use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 
 final class Filename implements Strategy
 {
+    /**
+     * @var OnlyKeepLanguageAlreadyCandidatesFilter
+     */
+    private $filter;
+
+    public function __construct(OnlyKeepLanguageAlreadyCandidatesFilter $filter)
+    {
+        $this->filter = $filter;
+    }
+
     /**
      * @return Language[]
      */
@@ -20,6 +31,6 @@ final class Filename implements Strategy
             return [];
         }
 
-        return [$language];
+        return $this->filter->filter($language_candidates, $language);
     }
 }
