@@ -12,7 +12,7 @@ final class Extension implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file): array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         $path_information = \pathinfo($file->getName());
         if (! isset($path_information['extension'])) {

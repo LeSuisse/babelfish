@@ -14,7 +14,7 @@ final class XML implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file): array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         $header = \implode('', \array_slice($file->getLines(), 0, self::SEARCH_SCOPE));
 

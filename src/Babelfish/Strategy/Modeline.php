@@ -98,7 +98,7 @@ EOT;
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file): array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         $content = $this->getHeaderAndFooter($file);
 
