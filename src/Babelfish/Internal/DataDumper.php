@@ -33,10 +33,12 @@ class DataDumper
 
     private function getParsedContent(string $file_to_parse): array
     {
-        $file_content = file_get_contents($file_to_parse);
-        if ($file_content === false) {
+        if (! file_exists($file_to_parse)) {
             throw new FileDoesNotExistException($file_to_parse);
         }
+        $file = new \SplFileObject($file_to_parse);
+        $file_content = $file->fread($file->getSize());
+
         return Yaml::parse($this->removeYamlMultiDocumentMarker($file_content));
     }
 
@@ -67,16 +69,23 @@ EOT
 
     private function getCommitReference(string $linguist_repo_path): string
     {
-        $commit = file_get_contents($linguist_repo_path . '/.git/HEAD') ?: null;
-
-        if ($commit === null) {
+        try {
+            $head_file = new \SplFileObject($linguist_repo_path . '/.git/HEAD');
+        } catch (\RuntimeException $ex) {
             return 'unknown';
         }
+        $commit = $head_file->fgets();
 
         if (strpos($commit, 'ref: refs/heads/') !== 0) {
             return $commit;
         }
 
-        return file_get_contents($linguist_repo_path . '/.git/' . substr($commit, 5, -1)) ?: 'unknown';
+        try {
+            $ref_file = new \SplFileObject($linguist_repo_path . '/.git/' . substr($commit, 5));
+        } catch (\RuntimeException $ex) {
+            return 'unknown';
+        }
+
+        return $ref_file->fgets() ?: 'unknown';
     }
 }
