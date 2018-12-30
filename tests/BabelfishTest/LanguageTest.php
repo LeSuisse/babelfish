@@ -164,7 +164,7 @@ class LanguageTest extends TestCase
             [['Ruby'], '.RB'],
             [['HTML+Django'], '.jinja'],
             [['C', 'C++', 'Objective-C'], '.h'],
-            [['Limbo', 'M', 'MUF', 'Mathematica', 'Matlab', 'Mercury', 'Objective-C'], '.m'],
+            [['Limbo', 'M', 'MATLAB', 'MUF', 'Mathematica', 'Mercury', 'Objective-C'], '.m'],
             [[], '.null'],
             [[], 'F.I.L.E.'],
         ];
