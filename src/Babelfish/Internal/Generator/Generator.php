@@ -6,6 +6,5 @@ namespace Babelfish\Internal\Generator;
 
 interface Generator
 {
-    public function linguistInputFile(): string;
-    public function generate(array $values): array;
+    public function generate(string $linguist_repository_path): array;
 }

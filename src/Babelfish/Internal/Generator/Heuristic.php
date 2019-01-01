@@ -4,21 +4,34 @@ declare(strict_types=1);
 
 namespace Babelfish\Internal\Generator;
 
+use Babelfish\Internal\Parser\Parser;
+use Babelfish\Internal\Parser\Yaml;
+
 final class Heuristic implements Generator
 {
+    use GetContentFromLinguistFileTrait;
+
     private const REGEX_DELIMITER = '/';
     private const HARDCODED_PATTERN_REPLACEMENT = [
         '/\A\s*[{\[]/' => '\A\s*[{\[]',
         '/\*'          => '\/\*',
     ];
 
-    public function linguistInputFile(): string
+    private $linguist_file;
+    private $parser;
+
+    public function __construct(string $linguist_file, Parser $parser)
     {
-        return 'lib/linguist/heuristics.yml';
+        $this->linguist_file = $linguist_file;
+        $this->parser = $parser;
     }
 
-    public function generate(array $heuristics): array
+    public function generate(string $linguist_repo_path): array
     {
+        $heuristics = $this->parser->getParsedContent(
+            $this->getContent($linguist_repo_path, $this->linguist_file)
+        );
+
         $existing_named_patterns = [];
         foreach ($heuristics['named_patterns'] as $name => $pattern) {
             $existing_named_patterns[$name] = $this->getPattern($pattern);

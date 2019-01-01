@@ -13,26 +13,28 @@ use Babelfish\Internal\Generator\Interpreter;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$yaml_parser = new \Babelfish\Internal\Parser\Yaml;
+
 $data_dumper = new DataDumper(
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Aliases.php',
-        new Alias
+        new Alias('lib/linguist/languages.yml', $yaml_parser)
     ),
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Filenames.php',
-        new Filename
+        new Filename('lib/linguist/languages.yml', $yaml_parser)
     ),
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Interpreters.php',
-        new Interpreter
+        new Interpreter('lib/linguist/languages.yml', $yaml_parser)
     ),
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Extensions.php',
-        new Extension
+        new Extension('lib/linguist/languages.yml', $yaml_parser)
     ),
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Heuristics.php',
-        new Heuristic
+        new Heuristic('lib/linguist/heuristics.yml', $yaml_parser)
     )
 );
 $data_dumper->dump(__DIR__ . '/../linguist/');

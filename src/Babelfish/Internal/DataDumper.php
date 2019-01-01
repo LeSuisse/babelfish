@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Babelfish\Internal;
 
-use Symfony\Component\Yaml\Yaml;
-
 class DataDumper
 {
     /**
@@ -24,27 +22,10 @@ class DataDumper
 
         foreach ($this->dumps as $dump) {
             $generator = $dump->getGenerator();
-            $parsed_content = $this->getParsedContent($linguist_repo_path . '/' . $generator->linguistInputFile());
 
-            $exported_values = $generator->generate($parsed_content);
+            $exported_values = $generator->generate($linguist_repo_path);
             $this->save($exported_values, $dump->getOutputPath(), $commit_reference);
         }
-    }
-
-    private function getParsedContent(string $file_to_parse): array
-    {
-        if (! file_exists($file_to_parse)) {
-            throw new FileDoesNotExistException($file_to_parse);
-        }
-        $file = new \SplFileObject($file_to_parse);
-        $file_content = $file->fread($file->getSize());
-
-        return Yaml::parse($this->removeYamlMultiDocumentMarker($file_content));
-    }
-
-    private function removeYamlMultiDocumentMarker(string $content): string
-    {
-        return preg_replace('/^---$/m', '', $content);
     }
 
     private function save(array $exported_values, string $output_file, string $linguist_commit_reference): void
