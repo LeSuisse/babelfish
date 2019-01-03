@@ -23,6 +23,9 @@ final class ClassifierSample implements Generator
         $iterator = new \RecursiveIteratorIterator($directory);
         foreach ($iterator as $sample_file) {
             $language_name = basename($sample_file->getPath());
+            if ($language_name === 'filenames') {
+                $language_name = basename(dirname($sample_file->getPath()));
+            }
             $samples[] = new TrainSampleFromFile($language_name, $sample_file->getPathname());
         }
 

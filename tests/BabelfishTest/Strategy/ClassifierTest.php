@@ -70,6 +70,7 @@ class ClassifierTest extends TestCase
             'hiera_include.pp' => true,
             'unmanaged-notify-puppet25.pp' => true,
             'hello.n' => true,
+            'booters.r' => true,
             'Person.gs' => true,
             'Ronin.gs' => true,
             'log-to-database.lisp' => true,
@@ -142,6 +143,7 @@ class ClassifierTest extends TestCase
             'Layout.re' => true,
             'qtbase-native.bb' => true,
             'wsapi.fcgi' => true,
+            'aa.d' => true,
             'pdp10.md' => true,
             'NiAlH_jea.eam.fs' => true,
             'hello.blade.php' => true,
@@ -151,12 +153,8 @@ class ClassifierTest extends TestCase
             'AppController.j' => true,
             'top.sls' => true,
             'list.asc' => true,
-            'php.fcgi' => true,
             'KeyboardMovement_102.asc' => true,
             'characterStepEvent.gml' => true,
-            'rmMonAnnCycLLT-help.ncl' => true,
-            'min-help.ncl' => true,
-            'zonalAve-help.ncl' => true,
             'example.ch' => true,
             'refs.rno' => true,
             'create_view.l' => true,
@@ -171,6 +169,7 @@ class ClassifierTest extends TestCase
             'UserIDRecipe.hh' => true,
             'NonStrictFile.hh' => true,
             'RecipeWithDemo.hh' => true,
+            'funs.php' => true,
             'DBResultRecipe.hh' => true,
             'Controller.hh' => true,
             'Nav.hh' => true,
@@ -186,6 +185,7 @@ class ClassifierTest extends TestCase
             'error.hh' => true,
             'GetController.hh' => true,
             'startup.hh' => true,
+            'htmlgen.m4' => true,
             'colormatrix.fs' => true,
             'fs_kernel.fs' => true,
             'lock.m' => true,
@@ -223,6 +223,9 @@ class ClassifierTest extends TestCase
             );
 
             $expected_language_name = basename($sample_file->getPath());
+            if ($expected_language_name === 'filename') {
+                $expected_language_name = basename(dirname($sample_file->getPath()));
+            }
 
             $this->assertEquals($expected_language_name, $classified_languages[0]->getName());
         }
