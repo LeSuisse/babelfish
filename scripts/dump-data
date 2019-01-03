@@ -6,6 +6,7 @@ declare(strict_types=1);
 use Babelfish\Internal\Generator\Alias;
 use Babelfish\Internal\DataDumper;
 use Babelfish\Internal\Dump;
+use Babelfish\Internal\Generator\ClassifierSample;
 use Babelfish\Internal\Generator\Extension;
 use Babelfish\Internal\Generator\Filename;
 use Babelfish\Internal\Generator\Heuristic;
@@ -35,6 +36,10 @@ $data_dumper = new DataDumper(
     new Dump(
         __DIR__ . '/../src/Babelfish/Data/Heuristics.php',
         new Heuristic('lib/linguist/heuristics.yml', $yaml_parser)
+    ),
+    new Dump(
+        __DIR__ . '/../src/Babelfish/Data/ClassifierSamples.php',
+        new ClassifierSample
     )
 );
 $data_dumper->dump(__DIR__ . '/../linguist/');
