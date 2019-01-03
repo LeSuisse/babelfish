@@ -5,7 +5,17 @@ declare(strict_types=1);
 namespace Babelfish;
 
 use Babelfish\File\SourceFile;
+use Babelfish\Strategy\Classification\CachedDatabase;
+use Babelfish\Strategy\Classifier;
+use Babelfish\Strategy\Extension;
+use Babelfish\Strategy\Filename;
+use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
+use Babelfish\Strategy\Heuristic;
+use Babelfish\Strategy\Modeline;
+use Babelfish\Strategy\Shebang;
 use Babelfish\Strategy\Strategy;
+use Babelfish\Strategy\Tokenizer\Tokenizer;
+use Babelfish\Strategy\XML;
 
 class Babelfish
 {
@@ -19,17 +29,34 @@ class Babelfish
         $this->strategies = $strategies;
     }
 
-    /**
-     * @return Language[]
-     */
-    public function getLanguages(SourceFile $file): array
+    public static function getWithDefaultStrategies(): self
     {
-        $languages = [];
+        $only_keep_language_already_candidate_filter = new OnlyKeepLanguageAlreadyCandidatesFilter;
+        return new self(
+            new Modeline($only_keep_language_already_candidate_filter),
+            new Filename($only_keep_language_already_candidate_filter),
+            new Shebang($only_keep_language_already_candidate_filter),
+            new Extension($only_keep_language_already_candidate_filter),
+            new XML,
+            new Heuristic,
+            new Classifier(new Tokenizer, new CachedDatabase)
+        );
+    }
 
+    public function getLanguage(SourceFile $file): ?Language
+    {
+        $candidates = [];
         foreach ($this->strategies as $strategy) {
-            $languages[] = $strategy->getLanguages($file);
+            $candidates = $strategy->getLanguages($file, ...$candidates);
+            if (count($candidates) === 1) {
+                return $candidates[0];
+            }
         }
 
-        return array_merge(...$languages);
+        if (empty($candidates)) {
+            return null;
+        }
+
+        return $candidates[0];
     }
 }
