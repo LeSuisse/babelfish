@@ -55,23 +55,8 @@ EOT
 
     private function getCommitReference(string $linguist_repo_path): string
     {
-        try {
-            $head_file = new \SplFileObject($linguist_repo_path . '/.git/HEAD');
-        } catch (\RuntimeException $ex) {
-            return 'unknown';
-        }
-        $commit = $head_file->fgets();
+        $commit_reference = exec('git -C ' . escapeshellarg($linguist_repo_path) . ' rev-parse HEAD');
 
-        if (strpos($commit, 'ref: refs/heads/') !== 0) {
-            return $commit;
-        }
-
-        try {
-            $ref_file = new \SplFileObject($linguist_repo_path . '/.git/' . substr($commit, 5));
-        } catch (\RuntimeException $ex) {
-            return 'unknown';
-        }
-
-        return $ref_file->fgets() ?: 'unknown';
+        return trim($commit_reference);
     }
 }
