@@ -45,7 +45,7 @@ class Babelfish
 
     public function getLanguage(SourceFile $file): ?Language
     {
-        $candidates = [];
+        $candidates = [Language::findByAlias('JSON')];
         foreach ($this->strategies as $strategy) {
             $candidates = $strategy->getLanguages($file, ...$candidates);
             if (count($candidates) === 1) {
