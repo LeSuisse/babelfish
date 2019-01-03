@@ -32,6 +32,11 @@ class DataDumper
     {
         $marshalled_value = var_export($exported_values, true);
 
+        $output_folder = dirname($output_file);
+        if (! is_dir($output_folder) && ! mkdir($output_folder, 0777, true) && ! is_dir($output_folder)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $output_folder));
+        }
+
         $res = file_put_contents(
             $output_file,
             <<<EOT
