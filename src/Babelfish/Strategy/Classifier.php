@@ -67,7 +67,9 @@ final class Classifier implements Strategy
     /**
      * @param string[] $language_names
      *
-     * @return <float|string>[]
+     * @return float[]
+     *
+     * @psalm-return array<string, float>
      */
     private function classify(string $data, array $language_names) : array
     {
@@ -86,6 +88,7 @@ final class Classifier implements Strategy
             }
         );
 
+        /** @psalm-var array<string, float> $scores */
         return $scores;
     }
 

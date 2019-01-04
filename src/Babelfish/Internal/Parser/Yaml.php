@@ -10,9 +10,12 @@ final class Yaml implements Parser
 {
     /**
      * @return mixed[]
+     *
+     * @psalm-suppress MixedInferredReturnType
      */
     public function getParsedContent(string $content) : array
     {
+        /** @psalm-suppress MixedReturnStatement */
         return \Symfony\Component\Yaml\Yaml::parse($this->removeYamlMultiDocumentMarker($content));
     }
 

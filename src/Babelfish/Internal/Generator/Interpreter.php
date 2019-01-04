@@ -22,10 +22,13 @@ final class Interpreter implements Generator
     }
 
     /**
-     * @return <string|string[]>[]
+     * @return mixed[]
+     *
+     * @psalm-return array<string, string[]>
      */
     public function generate(string $linguist_repo_path) : array
     {
+        /** @psalm-var array<string, array<string, string[]>> $languages */
         $languages = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
         );

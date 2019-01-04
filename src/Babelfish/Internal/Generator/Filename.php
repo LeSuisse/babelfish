@@ -26,6 +26,7 @@ final class Filename implements Generator
      */
     public function generate(string $linguist_repo_path) : array
     {
+        /** @psalm-var array<string, array{filenames?: string[]}> $languages */
         $languages = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
         );

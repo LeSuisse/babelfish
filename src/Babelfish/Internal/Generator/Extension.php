@@ -22,10 +22,11 @@ final class Extension implements Generator
     }
 
     /**
-     * @return <string|string[]>[]
+     * @return string[][]
      */
     public function generate(string $linguist_repo_path) : array
     {
+        /** @psalm-var array<string, array{extensions?: string[]}> $languages */
         $languages = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
         );

@@ -24,6 +24,7 @@ final class Extension implements Strategy
      */
     public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
     {
+        /** @psalm-var array{extension: string, filename: string} $path_information */
         $path_information = pathinfo($file->getName());
         if (! isset($path_information['extension'])) {
             return [];

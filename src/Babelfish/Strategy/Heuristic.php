@@ -6,6 +6,7 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
+use const PATHINFO_EXTENSION;
 use function pathinfo;
 use function preg_match;
 use function strtolower;
@@ -22,17 +23,23 @@ final class Heuristic implements Strategy
     {
         static $heuristics_indexed_by_extension = null;
         if ($heuristics_indexed_by_extension === null) {
+            /** @psalm-var array<string, array<string, mixed>> $heuristics_indexed_by_extension */
             $heuristics_indexed_by_extension = include __DIR__ . '/../Data/Heuristics.php';
         }
 
-        $path_information = pathinfo($file->getName());
-        $file_extension   = null;
-        if (isset($path_information['extension'])) {
-            $file_extension = '.' . strtolower($path_information['extension']);
-        }
-        if ($file_extension === null || ! isset($heuristics_indexed_by_extension[$file_extension])) {
+        $file_extension = pathinfo($file->getName(), PATHINFO_EXTENSION);
+        if ($file_extension === '') {
             return [];
         }
+        $file_extension = '.' . strtolower($file_extension);
+
+        if (! isset($heuristics_indexed_by_extension[$file_extension])) {
+            return [];
+        }
+        /**
+         * @psalm-var array<string, array{positive: string, negative: string, and: array<string, array{positive: string, negative: string}>}> $heuristics
+         * @psalm-suppress MixedArrayAccess
+         */
         $heuristics = $heuristics_indexed_by_extension[$file_extension];
 
         $languages = [];
@@ -64,6 +71,8 @@ final class Heuristic implements Strategy
 
     /**
      * @param string[] $rules
+     *
+     * @psalm-param array{positive: string, negative: string, and: array<string, array{positive: string, negative: string}>} $rules
      */
     private function validateRules(string $data, array $rules) : bool
     {
@@ -83,6 +92,8 @@ final class Heuristic implements Strategy
 
     /**
      * @param string[] $rule
+     *
+     * @psalm-param array{positive: string, negative: string} $rule
      */
     private function validateSimpleRule(string $data, array $rule) : bool
     {

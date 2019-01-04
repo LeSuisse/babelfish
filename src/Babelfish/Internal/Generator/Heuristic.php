@@ -32,27 +32,43 @@ final class Heuristic implements Generator
     }
 
     /**
-     * @return <string|<string|string[]>[]>[]
+     * @return mixed[]
+     *
+     * @psalm-return array<mixed, array<mixed, array{positive?:string, negative?:string, and?:array<int, array{positive?:string, negative?:string}>}>>
      */
     public function generate(string $linguist_repo_path) : array
     {
+        /**
+         * @param array{
+         *      named_patterns: array<string, string|string[]>,
+         *      disambiguations: array{rules: string[], extensions: string[]}
+         * } $heuristics
+         */
         $heuristics = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
         );
 
+        /** @psalm-var array<string, string> $existing_named_patterns */
         $existing_named_patterns = [];
+        /**
+         * @var string $name
+         * @var string|string[] $pattern
+         */
         foreach ($heuristics['named_patterns'] as $name => $pattern) {
             $existing_named_patterns[$name] = $this->getPattern($pattern);
         }
 
         $disambiguations_by_extension = [];
+        /** @psalm-var array{rules: array<string, string[][]>, extensions: string[]} $disambiguation */
         foreach ($heuristics['disambiguations'] as $disambiguation) {
             $parsed_rules_by_language = [];
             foreach ($disambiguation['rules'] as $rule) {
+                /** @psalm-suppress InvalidArgument */
                 $parsed_rule = $this->getParsedPatterns($rule, $existing_named_patterns);
                 if (isset($rule['and'])) {
                     $parsed_rule['and'] = [];
                     foreach ($rule['and'] as $and_rule) {
+                        /** @psalm-suppress InvalidArgument */
                         $parsed_rule['and'][] = $this->getParsedPatterns($and_rule, $existing_named_patterns);
                     }
                 }
@@ -68,6 +84,7 @@ final class Heuristic implements Generator
                 }
             }
 
+            /** @var string $extension */
             foreach ($disambiguation['extensions'] as $extension) {
                 if (isset($disambiguations_by_extension[$extension])) {
                     throw new HeuristicMultipleExtension($extension);
@@ -79,10 +96,12 @@ final class Heuristic implements Generator
     }
 
     /**
-     * @param <string|string>[] $rule
-     * @param <string|string>[] $existing_named_patterns
+     * @param string[] $rule
+     * @param string[] $existing_named_patterns
      *
-     * @return <string|string[]>[]
+     * @return string[][]
+     *
+     * @psalm-return array{positive?: string, negative?: string}
      */
     private function getParsedPatterns(array $rule, array $existing_named_patterns) : array
     {
@@ -103,8 +122,8 @@ final class Heuristic implements Generator
     }
 
     /**
-     * @param <string|string>[] $rule
-     * @param <string|string>[] $existing_named_patterns
+     * @param string[] $rule
+     * @param string[] $existing_named_patterns
      */
     private function getPositivePattern(array $rule, array $existing_named_patterns) : ?string
     {

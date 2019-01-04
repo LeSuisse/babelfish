@@ -9,6 +9,7 @@ use Babelfish\Strategy\Classification\TrainSampleFromFile;
 use Babelfish\Strategy\Tokenizer\Tokenizer;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 use function basename;
 use function dirname;
 
@@ -17,7 +18,7 @@ final class ClassifierSample implements Generator
     use GetContentFromLinguistFileTrait;
 
     /**
-     * @return <string|<float|mixed>[]
+     * @return mixed[]
      */
     public function generate(string $linguist_repository_path) : array
     {
@@ -28,6 +29,7 @@ final class ClassifierSample implements Generator
             RecursiveDirectoryIterator::SKIP_DOTS
         );
         $iterator  = new RecursiveIteratorIterator($directory);
+        /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
             $language_name = basename($sample_file->getPath());
             if ($language_name === 'filenames') {

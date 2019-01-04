@@ -8,7 +8,16 @@ use Babelfish\Strategy\Tokenizer\Tokenizer;
 
 final class TrainableDatabase implements Database
 {
-    /** @var <string|mixed>[] */
+    /**
+     * @var int[]|mixed[]
+     * @psalm-var array{
+     *      tokens_total: int,
+     *      languages_total: int,
+     *      tokens: array<string, array<string, int>>,
+     *      language_tokens: array<string, int>,
+     *      languages: array<string, int>
+     * }
+     */
     private $db = [
         'tokens_total' => 0,
         'languages_total' => 0,
@@ -77,7 +86,7 @@ final class TrainableDatabase implements Database
     }
 
     /**
-     * @return <string|<float|mixed>[]
+     * @return int[]|mixed[]
      */
     public function getRawDatabase() : array
     {

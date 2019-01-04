@@ -26,8 +26,10 @@ class Language
     {
         static $languages_indexed_by_alias = null;
         if ($languages_indexed_by_alias === null) {
+            /** @psalm-var array<string, string> $languages_indexed_by_alias */
             $languages_indexed_by_alias = include __DIR__ . '/Data/Aliases.php';
         }
+        /** @var string|null $language_name */
         $language_name = $languages_indexed_by_alias[str_replace(' ', '-', strtolower($alias))] ?? null;
         if ($language_name === null) {
             return null;
@@ -39,8 +41,10 @@ class Language
     {
         static $languages_indexed_by_filename = null;
         if ($languages_indexed_by_filename === null) {
+            /** @psalm-var array<string, string> $languages_indexed_by_filename */
             $languages_indexed_by_filename = include __DIR__ . '/Data/Filenames.php';
         }
+        /** @var string|null $language_name */
         $language_name = $languages_indexed_by_filename[$filename] ?? null;
         if ($language_name === null) {
             return null;
@@ -55,8 +59,10 @@ class Language
     {
         static $languages_indexed_by_interpreter = null;
         if ($languages_indexed_by_interpreter === null) {
+            /** @psalm-var array<string, string[]> $languages_indexed_by_interpreter */
             $languages_indexed_by_interpreter = include __DIR__ . '/Data/Interpreters.php';
         }
+        /** @var string[] $languages_name */
         $languages_name = $languages_indexed_by_interpreter[$interpreter] ?? [];
         $languages      = [];
         foreach ($languages_name as $language_name) {
@@ -72,8 +78,10 @@ class Language
     {
         static $languages_indexed_by_extension = null;
         if ($languages_indexed_by_extension === null) {
+            /** @psalm-var array<string, string[]> $languages_indexed_by_extension */
             $languages_indexed_by_extension = include __DIR__ . '/Data/Extensions.php';
         }
+        /** @var string[] $languages_name */
         $languages_name = $languages_indexed_by_extension[strtolower($extension)] ?? [];
         $languages      = [];
         foreach ($languages_name as $language_name) {

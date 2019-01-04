@@ -117,7 +117,10 @@ EOT;
 
         preg_match_all(self::EMACS_MODELINE, $content, $matches_emacs);
         preg_match_all(self::VIM_MODELINE, $content, $matches_vim);
-
+        /**
+         * @psalm-var array{1: string[]} $matches_emacs
+         * @psalm-var array{1: string[]} $matches_vim
+         */
         $aliases = array_merge($matches_emacs[1], $matches_vim[1]);
 
         if (empty($aliases)) {

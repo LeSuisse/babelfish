@@ -37,7 +37,10 @@ final class Tokenizer
         // Shebang
         $content = (string) preg_replace_callback(
             self::REGEX_SHEBANG_WITH_ENV,
-            static function ($matches) use (&$tokens) {
+            /**
+             * @param string[] $matches
+             */
+            static function (array $matches) use (&$tokens) : string {
                 $match = strrchr($matches[0], ' ');
                 if ($match === false) {
                     $match = $matches[0];
@@ -51,7 +54,10 @@ final class Tokenizer
         );
         $content = (string) preg_replace_callback(
             self::REGEX_SHEBANG,
-            static function ($matches) use (&$tokens) {
+            /**
+             * @param string[] $matches
+             */
+            static function (array $matches) use (&$tokens) : string {
                 $match = strrchr($matches[0], '/');
                 if ($match === false) {
                     $match = $matches[0];
@@ -69,7 +75,10 @@ final class Tokenizer
         // SGML
         $content = (string) preg_replace_callback(
             self::REGEX_SGML,
-            static function ($matches) use (&$tokens) {
+            /**
+             * @param string[] $matches
+             */
+            static function (array $matches) use (&$tokens) : string {
                 if (preg_match(self::REGEX_SGML_COMMENT, $matches[0]) === 1) {
                     return ' ';
                 }
@@ -78,7 +87,10 @@ final class Tokenizer
                 // Attributes
                 preg_replace_callback(
                     self::REGEX_SGML_ATTRIBUTE,
-                    static function ($matches) use (&$tokens) {
+                    /**
+                     * @param string[] $matches
+                     */
+                    static function (array $matches) use (&$tokens) : string {
                         if ($matches[1] !== '') {
                             $tokens[] = $matches[1];
                         }
@@ -108,6 +120,9 @@ final class Tokenizer
 
         // Punctuations
         $match_and_replace_callback = static function (array $matches) use (&$tokens) : string {
+            /**
+             * @var string[] $matches
+             */
             $tokens[] = $matches[0];
             return ' ';
         };
@@ -120,7 +135,10 @@ final class Tokenizer
         // Skip literal number
         $content = (string) preg_replace_callback(
             self::REGEX_LITERAL_NUMBER,
-            static function ($matches) {
+            /**
+             * @param string[] $matches
+             */
+            static function (array $matches) : string {
                 return $matches[1] . ' ';
             },
             $content

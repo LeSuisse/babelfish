@@ -7,14 +7,32 @@ namespace Babelfish\Strategy\Classification;
 final class CachedDatabase implements Database
 {
     /**
-     * @return <string|<int|mixed>[]
+     * @return int[]|mixed[]
+     *
+     * @psalm-return array{
+     *      tokens_total: int,
+     *      languages_total: int,
+     *      tokens: array<string, array<string, int>>,
+     *      language_tokens: array<string, int>,
+     *      languages: array<string, int>
+     * }
      */
     private function getDB() : array // phpcs:ignore
     {
         static $db = null;
         if ($db === null) {
+            /** @psalm-suppress MixedAssignment */
             $db = include __DIR__ . '/../../Data/ClassifierSamples.php';
         }
+        /**
+         * @psalm-var array{
+         *      tokens_total: int,
+         *      languages_total: int,
+         *      tokens: array<string, array<string, int>>,
+         *      language_tokens: array<string, int>,
+         *      languages: array<string, int>
+         * } $db
+         */
         return $db;
     }
 
@@ -38,9 +56,6 @@ final class CachedDatabase implements Database
         return $this->getDB()['languages'][$language_name];
     }
 
-    /**
-     * @return <string|<float|mixed>[]
-     */
     public function getTotalLanguages() : int
     {
         return $this->getDB()['languages_total'];

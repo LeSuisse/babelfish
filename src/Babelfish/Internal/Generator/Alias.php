@@ -24,10 +24,13 @@ final class Alias implements Generator
     }
 
     /**
-     * @return <string|string>[]
+     * @return string[]
+     *
+     * @psalm-return array<string|string>
      */
     public function generate(string $linguist_repo_path) : array
     {
+        /** @psalm-var array<string, array{aliases?: string[]}> $languages */
         $languages = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
         );
