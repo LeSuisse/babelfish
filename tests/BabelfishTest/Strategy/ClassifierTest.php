@@ -14,13 +14,18 @@ use Babelfish\Strategy\Tokenizer\Tokenizer;
 use BabelfishTest\LinguistData;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use function basename;
+use function count;
+use function dirname;
+use function file_get_contents;
 
 class ClassifierTest extends TestCase
 {
-    public function testClassification(): void
+    public function testClassification() : void
     {
         $tokenizer = new Tokenizer();
-        $db = new TrainableDatabase(
+        $db        = new TrainableDatabase(
             $tokenizer,
             new TrainSampleFromFile('Ruby', __DIR__ . '/../../../linguist/samples/Ruby/foo.rb'),
             new TrainSampleFromFile('Objective-C', __DIR__ . '/../../../linguist/samples/Objective-C/Foo.h'),
@@ -44,13 +49,13 @@ class ClassifierTest extends TestCase
         $this->assertEquals('Ruby', $found_languages[0]->getName());
     }
 
-    public function testClassifyWithoutCandidates(): void
+    public function testClassifyWithoutCandidates() : void
     {
-        $classifier = new Classifier(new Tokenizer, new CachedDatabase);
+        $classifier = new Classifier(new Tokenizer(), new CachedDatabase());
         $this->assertEmpty($classifier->getLanguages(LinguistData::getSampleSourceFile('Ruby/foo.rb')));
     }
 
-    public function testClassificationAmbiguousLanguages(): void
+    public function testClassificationAmbiguousLanguages() : void
     {
         // Whitelisting incorrectly classified languages for now
         $failure_whitelist = [
@@ -200,10 +205,10 @@ class ClassifierTest extends TestCase
             'nimfix.nim.cfg' => 'INI',
         ];
 
-        $classifier = new Classifier(new Tokenizer, new CachedDatabase);
+        $classifier = new Classifier(new Tokenizer(), new CachedDatabase());
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
-        $iterator = new \RecursiveIteratorIterator($directory);
+        $iterator  = new RecursiveIteratorIterator($directory);
         foreach ($iterator as $sample_file) {
             $filename = $sample_file->getFilename();
 
@@ -222,7 +227,8 @@ class ClassifierTest extends TestCase
             }
 
             $classified_languages = $classifier->getLanguages(
-                new ContentFile($filename,
+                new ContentFile(
+                    $filename,
                     file_get_contents($sample_file->getPathname())
                 ),
                 ...$languages

@@ -9,31 +9,36 @@ use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 use Babelfish\Strategy\Shebang;
 use PHPUnit\Framework\TestCase;
+use function array_map;
+use function explode;
 
 class ShebangTest extends TestCase
 {
     /**
+     * @param string[] $expected_language_names
+     *
      * @dataProvider shebangFileContentProvider
      */
-    public function testSourceFileWithShebang(array $expected_language_names, string $file_content): void
+    public function testSourceFileWithShebang(array $expected_language_names, string $file_content) : void
     {
         $file = $this->createMock(SourceFile::class);
         $file->method('getLines')->willReturn(explode("\n", $file_content));
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $pass_out_filter->method('filter')->willReturnCallback(
-            function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) {
                 return $found_languages;
             }
         );
 
-        $strategy = new Shebang($pass_out_filter);
+        $strategy  = new Shebang($pass_out_filter);
         $languages = $strategy->getLanguages($file);
 
         $this->assertSameSize($expected_language_names, $languages);
-        $this->assertSame($expected_language_names,
+        $this->assertSame(
+            $expected_language_names,
             array_map(
-                function (Language $language) {
+                static function (Language $language) {
                     return $language->getName();
                 },
                 $languages
@@ -41,20 +46,23 @@ class ShebangTest extends TestCase
         );
     }
 
-    public function testAFileWithoutAnyLinesDoesNotFindAnyLanguage(): void
+    public function testAFileWithoutAnyLinesDoesNotFindAnyLanguage() : void
     {
         $file = $this->createMock(SourceFile::class);
         $file->method('getLines')->willReturn([]);
 
         $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
 
-        $strategy = new Shebang($filter);
+        $strategy  = new Shebang($filter);
         $languages = $strategy->getLanguages($file);
 
         $this->assertEmpty($languages);
     }
 
-    public function shebangFileContentProvider(): array
+    /**
+     * @return <string[]|string>[]
+     */
+    public function shebangFileContentProvider() : array
     {
         return [
             [[], ''],

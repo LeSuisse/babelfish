@@ -7,6 +7,11 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
+use function array_merge;
+use function array_slice;
+use function count;
+use function implode;
+use function preg_match_all;
 
 final class Modeline implements Strategy
 {
@@ -43,7 +48,7 @@ final class Modeline implements Strategy
          -\*-
         /xi
 EOT;
-    private const VIM_MODELINE = <<<EOT
+    private const VIM_MODELINE   = <<<EOT
         /
          # Start modeline. Could be `vim:`, `vi:` or `ex:`
          (?:
@@ -95,9 +100,7 @@ EOT;
         /xi
 EOT;
 
-    /**
-     * @var OnlyKeepLanguageAlreadyCandidatesFilter
-     */
+    /** @var OnlyKeepLanguageAlreadyCandidatesFilter */
     private $filter;
 
     public function __construct(OnlyKeepLanguageAlreadyCandidatesFilter $filter)
@@ -108,7 +111,7 @@ EOT;
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
     {
         $content = $this->getHeaderAndFooter($file);
 
@@ -130,15 +133,15 @@ EOT;
         return $this->filter->filter($language_candidates, $language);
     }
 
-    private function getHeaderAndFooter(SourceFile $file): string
+    private function getHeaderAndFooter(SourceFile $file) : string
     {
         $lines = $file->getLines();
 
-        if (\count($lines) <= self::SEARCH_SCOPE * 2) {
-            return \implode("\n", $lines) . "\n";
+        if (count($lines) <= self::SEARCH_SCOPE * 2) {
+            return implode("\n", $lines) . "\n";
         }
 
-        return \implode("\n", \array_slice($lines, 0, self::SEARCH_SCOPE)) . "\n" .
-            \implode("\n", \array_slice($lines, -self::SEARCH_SCOPE, self::SEARCH_SCOPE)) . "\n";
+        return implode("\n", array_slice($lines, 0, self::SEARCH_SCOPE)) . "\n" .
+            implode("\n", array_slice($lines, -self::SEARCH_SCOPE, self::SEARCH_SCOPE)) . "\n";
     }
 }

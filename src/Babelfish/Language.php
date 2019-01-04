@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Babelfish;
 
+use function str_replace;
+use function strtolower;
+
 class Language
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $name;
 
     private function __construct(string $name)
@@ -16,12 +17,12 @@ class Language
         $this->name = $name;
     }
 
-    public function getName(): string
+    public function getName() : string
     {
         return $this->name;
     }
 
-    public static function findByAlias(string $alias): ?self
+    public static function findByAlias(string $alias) : ?self
     {
         static $languages_indexed_by_alias = null;
         if ($languages_indexed_by_alias === null) {
@@ -34,7 +35,7 @@ class Language
         return new self($language_name);
     }
 
-    public static function findByFilename(string $filename): ?self
+    public static function findByFilename(string $filename) : ?self
     {
         static $languages_indexed_by_filename = null;
         if ($languages_indexed_by_filename === null) {
@@ -50,14 +51,14 @@ class Language
     /**
      * @return self[]
      */
-    public static function findLanguagesByInterpreter(string $interpreter): array
+    public static function findLanguagesByInterpreter(string $interpreter) : array
     {
         static $languages_indexed_by_interpreter = null;
         if ($languages_indexed_by_interpreter === null) {
             $languages_indexed_by_interpreter = include __DIR__ . '/Data/Interpreters.php';
         }
         $languages_name = $languages_indexed_by_interpreter[$interpreter] ?? [];
-        $languages = [];
+        $languages      = [];
         foreach ($languages_name as $language_name) {
             $languages[] = new self($language_name);
         }
@@ -67,14 +68,14 @@ class Language
     /**
      * @return self[]
      */
-    public static function findLanguagesByExtension(string $extension): array
+    public static function findLanguagesByExtension(string $extension) : array
     {
         static $languages_indexed_by_extension = null;
         if ($languages_indexed_by_extension === null) {
             $languages_indexed_by_extension = include __DIR__ . '/Data/Extensions.php';
         }
         $languages_name = $languages_indexed_by_extension[strtolower($extension)] ?? [];
-        $languages = [];
+        $languages      = [];
         foreach ($languages_name as $language_name) {
             $languages[] = new self($language_name);
         }

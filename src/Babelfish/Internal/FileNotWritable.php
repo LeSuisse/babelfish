@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Babelfish\Internal;
 
-class FileNotWritableException extends \RuntimeException
+use RuntimeException;
+
+class FileNotWritable extends RuntimeException
 {
     public function __construct(string $path)
     {

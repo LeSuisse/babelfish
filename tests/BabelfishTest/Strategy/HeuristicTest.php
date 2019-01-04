@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class HeuristicTest extends TestCase
 {
-    public function testNoMatch(): void
+    public function testNoMatch() : void
     {
         $heuristic = new Heuristic();
         $languages = $heuristic->getLanguages(
@@ -24,9 +24,11 @@ class HeuristicTest extends TestCase
     }
 
     /**
+     * @param string[] $language_candidate_names
+     *
      * @dataProvider heuristicDataProvider
      */
-    public function testHeuristic(SourceFile $file, array $language_candidate_names): void
+    public function testHeuristic(SourceFile $file, array $language_candidate_names) : void
     {
         $language_candidates = [];
         foreach ($language_candidate_names as $language_candidate_name) {
@@ -36,7 +38,10 @@ class HeuristicTest extends TestCase
         $this->assertSame($language_candidates, $heuristic->getLanguages($file, ...$language_candidates));
     }
 
-    public function heuristicDataProvider(): array
+    /**
+     * @return <SourceFile|string[]>[]
+     */
+    public function heuristicDataProvider() : array
     {
         $raw_data = [
             'as' => [
@@ -158,7 +163,7 @@ class HeuristicTest extends TestCase
             ],
             'ml' => [
                 'OCaml' => ['OCaml'],
-                'Standard ML' => ['Standard ML']
+                'Standard ML' => ['Standard ML'],
             ],
             'mod' => [
                 'Modula-2' => ['Modula-2'],
@@ -178,7 +183,7 @@ class HeuristicTest extends TestCase
             'ncl' => [
                 'Roff' => ['NCL'],
                 'XML' => ['XML'],
-                'Text' => ['Text']
+                'Text' => ['Text'],
             ],
             'nl' => [
                 'NewLisp' => ['NewLisp'],
@@ -320,20 +325,22 @@ class HeuristicTest extends TestCase
         $provided_data[] = [LinguistData::getSampleSourceFile('Perl 6/hash.t'), ['Perl 6']];
         $provided_data[] = [LinguistData::getSampleSourceFile('Perl 6/listquote-whitespace.t'), ['Perl 6']];
 
-
         return $provided_data;
     }
 
     /**
      * @dataProvider ambiguousFileDataProvider
      */
-    public function testAmbiguousFileAreNotWronglyDetected(SourceFile $file, string $language_candidate_name): void
+    public function testAmbiguousFileAreNotWronglyDetected(SourceFile $file, string $language_candidate_name) : void
     {
         $heuristic = new Heuristic();
         $this->assertEmpty($heuristic->getLanguages($file, Language::findByAlias($language_candidate_name)));
     }
 
-    public function ambiguousFileDataProvider(): array
+    /**
+     * @return <SourceFile|string>[]
+     */
+    public function ambiguousFileDataProvider() : array
     {
         $files_to_provide = [];
         foreach ($this->getAmbiguousFile() as $extension => $languages) {
@@ -346,15 +353,16 @@ class HeuristicTest extends TestCase
         return $files_to_provide;
     }
 
-    private function getAmbiguousFile(): array
+    /**
+     * @return <string|string<string|bool>[]>[]
+     */
+    private function getAmbiguousFile() : array
     {
-        $ambiguous = [
+        return [
             'm' => ['Mathematica' => ['Problem12.m' => true]],
             'ml' => ['OCaml' => ['date.ml' => true, 'common.ml' => true, 'sigset.ml' => true]],
             'ncl' => ['Text' => ['LIDARLite.ncl' => true]],
             'pp' => ['Puppet' => ['stages-example.pp' => true, 'hiera_include.pp' => true]],
         ];
-
-        return $ambiguous;
     }
 }

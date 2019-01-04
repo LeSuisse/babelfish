@@ -15,9 +15,9 @@ class XMLTest extends TestCase
     /**
      * @dataProvider XMLFileProviders
      */
-    public function testSourceFileXML(bool $is_xml, SourceFile $file): void
+    public function testSourceFileXML(bool $is_xml, SourceFile $file) : void
     {
-        $strategy = new XML();
+        $strategy  = new XML();
         $languages = $strategy->getLanguages($file);
 
         if ($is_xml) {
@@ -28,6 +28,9 @@ class XMLTest extends TestCase
         }
     }
 
+    /**
+     * @return <bool|SourceFile>[]
+     */
     public function XMLFileProviders()
     {
         return [
@@ -50,11 +53,11 @@ class XMLTest extends TestCase
         ];
     }
 
-    public function testDoNotTryToDetectXMLWhenLanguageCandidatesExist(): void
+    public function testDoNotTryToDetectXMLWhenLanguageCandidatesExist() : void
     {
         $language_candidates = [$this->createMock(Language::class), $this->createMock(Language::class)];
-        $strategy = new XML();
-        $detected_languages = $strategy->getLanguages(
+        $strategy            = new XML();
+        $detected_languages  = $strategy->getLanguages(
             $this->createMock(SourceFile::class),
             ...$language_candidates
         );

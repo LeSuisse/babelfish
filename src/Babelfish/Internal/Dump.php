@@ -8,27 +8,23 @@ use Babelfish\Internal\Generator\Generator;
 
 class Dump
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $output_path;
-    /**
-     * @var Generator
-     */
+    /** @var Generator */
     private $generator;
 
     public function __construct(string $output_path, Generator $generator)
     {
         $this->output_path = $output_path;
-        $this->generator = $generator;
+        $this->generator   = $generator;
     }
 
-    public function getOutputPath(): string
+    public function getOutputPath() : string
     {
         return $this->output_path;
     }
 
-    public function getGenerator(): Generator
+    public function getGenerator() : Generator
     {
         return $this->generator;
     }

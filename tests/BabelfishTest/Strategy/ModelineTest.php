@@ -16,36 +16,36 @@ class ModelineTest extends TestCase
     /**
      * @dataProvider modelineTestCaseProvider
      */
-    public function testSourceFileWithModeline(string $expected_language_name, string $linguist_fixture_path): void
+    public function testSourceFileWithModeline(string $expected_language_name, string $linguist_fixture_path) : void
     {
         $source_file = LinguistData::getFixtureSourceFile($linguist_fixture_path);
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $pass_out_filter->method('filter')->willReturnCallback(
-            function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) {
                 return $found_languages;
             }
         );
 
-        $modeline = new Modeline($pass_out_filter);
+        $modeline  = new Modeline($pass_out_filter);
         $languages = $modeline->getLanguages($source_file);
 
         $this->assertCount(1, $languages);
         $this->assertSame($expected_language_name, $languages[0]->getName());
     }
 
-    public function testSourceFileWithoutModelineInTheHeaderOrFooter(): void
+    public function testSourceFileWithoutModelineInTheHeaderOrFooter() : void
     {
-        $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
-        $modeline = new Modeline($filter);
+        $filter    = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        $modeline  = new Modeline($filter);
         $languages = $modeline->getLanguages(LinguistData::getSampleSourceFile('C/main.c'));
 
         $this->assertEmpty($languages);
     }
 
-    public function testNoLanguageIsReturnedWhenAliasGivenInTheModelineIsNotFound(): void
+    public function testNoLanguageIsReturnedWhenAliasGivenInTheModelineIsNotFound() : void
     {
-        $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        $filter   = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $modeline = new Modeline($filter);
 
         $file = $this->createMock(SourceFile::class);
@@ -56,7 +56,10 @@ class ModelineTest extends TestCase
         $this->assertEmpty($languages);
     }
 
-    public function modelineTestCaseProvider(): array
+    /**
+     * @return <string|string>[]
+     */
+    public function modelineTestCaseProvider() : array
     {
         return [
             ['Ruby', 'Data/Modelines/ruby'],

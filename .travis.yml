@@ -18,6 +18,14 @@ install:
 script:
   - ./vendor/bin/phpunit
 
+jobs:
+  include:
+    - stage: Code quality
+      php: 7.2
+      script: ./vendor/bin/phpcs
+      git:
+        submodules: false
+
 cache:
   directories:
     - vendor

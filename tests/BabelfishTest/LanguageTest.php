@@ -12,7 +12,7 @@ class LanguageTest extends TestCase
     /**
      * @dataProvider aliasesProvider
      */
-    public function testFindByAlias(?string $expected_language_name, string $alias): void
+    public function testFindByAlias(?string $expected_language_name, string $alias) : void
     {
         $language = Language::findByAlias($alias);
         $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
@@ -21,19 +21,21 @@ class LanguageTest extends TestCase
     /**
      * @dataProvider filenamesProvider
      */
-    public function testFindByFilename(?string $expected_language_name, string $filename): void
+    public function testFindByFilename(?string $expected_language_name, string $filename) : void
     {
         $language = Language::findByFilename($filename);
         $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
     }
 
     /**
+     * @param string[] $expected_languages_name
+     *
      * @dataProvider interpretersProvider
      */
-    public function testFindByInterpreter(array $expected_languages_name, string $interpreter): void
+    public function testFindByInterpreter(array $expected_languages_name, string $interpreter) : void
     {
         $languages = Language::findLanguagesByInterpreter($interpreter);
-        $names = [];
+        $names     = [];
         foreach ($languages as $language) {
             $names[] = $language->getName();
         }
@@ -41,19 +43,24 @@ class LanguageTest extends TestCase
     }
 
     /**
+     * @param string[] $expected_languages_name
+     *
      * @dataProvider extensionsProvider
      */
-    public function testFindLanguagesByExtension(array $expected_languages_name, string $extension): void
+    public function testFindLanguagesByExtension(array $expected_languages_name, string $extension) : void
     {
         $languages = Language::findLanguagesByExtension($extension);
-        $names = [];
+        $names     = [];
         foreach ($languages as $language) {
             $names[] = $language->getName();
         }
         $this->assertEquals($expected_languages_name, $names);
     }
 
-    public function aliasesProvider(): array
+    /**
+     * @return string[]
+     */
+    public function aliasesProvider() : array
     {
         return [
             ['ASP', 'asp'],
@@ -118,11 +125,14 @@ class LanguageTest extends TestCase
             ['X BitMap', 'xbm'],
             ['X PixMap', 'xpm'],
             ['YAML', 'yml'],
-            [null, 'do_not_exist']
+            [null, 'do_not_exist'],
         ];
     }
 
-    public function filenamesProvider(): array
+    /**
+     * @return string[]
+     */
+    public function filenamesProvider() : array
     {
         return [
             ['Shell', 'PKGBUILD'],
@@ -140,7 +150,10 @@ class LanguageTest extends TestCase
         ];
     }
 
-    public function interpretersProvider(): array
+    /**
+     * @return string[]
+     */
+    public function interpretersProvider() : array
     {
         return [
             [['Ruby'], 'ruby'],
@@ -157,7 +170,10 @@ class LanguageTest extends TestCase
         ];
     }
 
-    public function extensionsProvider(): array
+    /**
+     * @return string[]
+     */
+    public function extensionsProvider() : array
     {
         return [
             [['Ruby'], '.rb'],

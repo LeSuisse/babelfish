@@ -5,28 +5,36 @@ declare(strict_types=1);
 namespace Babelfish\Internal\Generator;
 
 use Babelfish\Internal\Parser\Parser;
-use Babelfish\Internal\Parser\Yaml;
+use function array_filter;
+use function implode;
+use function is_array;
+use function preg_match;
 
 final class Heuristic implements Generator
 {
     use GetContentFromLinguistFileTrait;
 
-    private const REGEX_DELIMITER = '/';
+    private const REGEX_DELIMITER               = '/';
     private const HARDCODED_PATTERN_REPLACEMENT = [
         '/\A\s*[{\[]/' => '\A\s*[{\[]',
         '/\*'          => '\/\*',
     ];
 
+    /** @var string */
     private $linguist_file;
+    /** @var Parser */
     private $parser;
 
     public function __construct(string $linguist_file, Parser $parser)
     {
         $this->linguist_file = $linguist_file;
-        $this->parser = $parser;
+        $this->parser        = $parser;
     }
 
-    public function generate(string $linguist_repo_path): array
+    /**
+     * @return <string|<string|string[]>[]>[]
+     */
+    public function generate(string $linguist_repo_path) : array
     {
         $heuristics = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
@@ -62,7 +70,7 @@ final class Heuristic implements Generator
 
             foreach ($disambiguation['extensions'] as $extension) {
                 if (isset($disambiguations_by_extension[$extension])) {
-                    throw new HeuristicMultipleExtensionException($extension);
+                    throw new HeuristicMultipleExtension($extension);
                 }
                 $disambiguations_by_extension[$extension] = $parsed_rules_by_language;
             }
@@ -70,7 +78,13 @@ final class Heuristic implements Generator
         return $disambiguations_by_extension;
     }
 
-    private function getParsedPatterns(array $rule, array $existing_named_patterns): array
+    /**
+     * @param <string|string>[] $rule
+     * @param <string|string>[] $existing_named_patterns
+     *
+     * @return <string|string[]>[]
+     */
+    private function getParsedPatterns(array $rule, array $existing_named_patterns) : array
     {
         $parsed_patterns = [];
 
@@ -80,7 +94,7 @@ final class Heuristic implements Generator
         }
         if (isset($rule['negative_pattern'])) {
             if ($positive_pattern !== null) {
-                throw new HeuristicRuleMultiplePatternsException($rule);
+                throw new HeuristicRuleMultiplePatterns($rule);
             }
             $parsed_patterns['negative'] = $this->addRegexDelimiterToPattern($this->getPattern($rule['negative_pattern']));
         }
@@ -88,7 +102,11 @@ final class Heuristic implements Generator
         return $parsed_patterns;
     }
 
-    private function getPositivePattern(array $rule, array $existing_named_patterns): ?string
+    /**
+     * @param <string|string>[] $rule
+     * @param <string|string>[] $existing_named_patterns
+     */
+    private function getPositivePattern(array $rule, array $existing_named_patterns) : ?string
     {
         $named_pattern = '';
         if (isset($rule['named_pattern'])) {
@@ -107,9 +125,8 @@ final class Heuristic implements Generator
 
     /**
      * @param string|string[] $pattern_rule
-     * @return string
      */
-    private function getPattern($pattern_rule): string
+    private function getPattern($pattern_rule) : string
     {
         if (is_array($pattern_rule)) {
             $pattern = implode('|', array_filter($pattern_rule));
@@ -121,13 +138,13 @@ final class Heuristic implements Generator
         }
 
         if (@preg_match($this->addRegexDelimiterToPattern($pattern), '') === false) {
-            throw new HeuristicPatternDoNotCompileException($pattern);
+            throw new HeuristicPatternDoNotCompile($pattern);
         }
 
         return $pattern;
     }
 
-    private function addRegexDelimiterToPattern(string $pattern): string
+    private function addRegexDelimiterToPattern(string $pattern) : string
     {
         return self::REGEX_DELIMITER . $pattern . self::REGEX_DELIMITER . 'm';
     }

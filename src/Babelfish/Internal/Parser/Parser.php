@@ -6,5 +6,8 @@ namespace Babelfish\Internal\Parser;
 
 interface Parser
 {
-    public function getParsedContent(string $content): array;
+    /**
+     * @return mixed[]
+     */
+    public function getParsedContent(string $content) : array;
 }

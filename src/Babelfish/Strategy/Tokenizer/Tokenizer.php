@@ -4,34 +4,40 @@ declare(strict_types=1);
 
 namespace Babelfish\Strategy\Tokenizer;
 
+use function preg_match;
+use function preg_replace;
+use function preg_replace_callback;
+use function strrchr;
+use function substr;
+
 final class Tokenizer
 {
     private const SHEBANG_TOKEN = 'SHEBANG#!';
 
-    private const REGEX_SHEBANG_WITH_ENV = '/^#![ \t]*(?:[[:alnum:]_\/]*\/)?env(?:[ \t]+(?:[^ \t=]*=[^ \t]*))*[ \t]+[[:alpha:]_]+/';
-    private const REGEX_SHEBANG = '/^#![ \t]*[[:alpha:]_\/]+/';
-    private const REGEX_SGML = '/(<\/?[^\s<>=\d"\']+)(\s.*?\/?>|>)/s';
-    private const REGEX_SGML_COMMENT = '/<!--.*?-->/s';
-    private const REGEX_SGML_ATTRIBUTE = '/\s+(\w+=)|\s+([^\s>]+)/';
-    private const REGEX_SGML_LONE_ATTRIBUTE = '/^\w+$/';
+    private const REGEX_SHEBANG_WITH_ENV      = '/^#![ \t]*(?:[[:alnum:]_\/]*\/)?env(?:[ \t]+(?:[^ \t=]*=[^ \t]*))*[ \t]+[[:alpha:]_]+/';
+    private const REGEX_SHEBANG               = '/^#![ \t]*[[:alpha:]_\/]+/';
+    private const REGEX_SGML                  = '/(<\/?[^\s<>=\d"\']+)(\s.*?\/?>|>)/s';
+    private const REGEX_SGML_COMMENT          = '/<!--.*?-->/s';
+    private const REGEX_SGML_ATTRIBUTE        = '/\s+(\w+=)|\s+([^\s>]+)/';
+    private const REGEX_SGML_LONE_ATTRIBUTE   = '/^\w+$/';
     private const REGEX_LITERAL_STRING_QUOTES = '/".*?(?<!\\\\)(?:"|$)|\'.*?(?<!\\\\)(?:\'|$)/s';
-    private const REGEX_MULTILINE_COMMENT = '~/\*.*?\*/|<!--.*?-->|\{-.*?-\}|\(\*.*?\*\)|""".*?"""|\'\'\'.*?\'\'\'~s';
-    private const REGEX_SINGLE_LINE_COMMENT = '~^(?://|--|#|%|")\s(?:[^\n]*$)~m';
-    private const REGEX_PUNCTUATION = '/;|\{|\}|\(|\)|\[|\]/';
-    private const REGEX_LITERAL_NUMBER = '/(^|\h|<<?|\+|\-|\*|\/|%|:|&&?|\|\|?)(?:0x[0-9A-Fa-f](?:[0-9A-Fa-f]|\.)*|\d(?:\d|\.)*)(?:[uU][lL]{0,2}|(?:[eE][-+]\d*)?[fFlL]*)/';
-    private const REGEX_REGULAR_TOKEN = '/[0-9A-Za-z_\.@#\/\*]+/';
-    private const REGEX_OPERATOR = '/<<?|\+|\-|\*|\/|%|&&?|\|\|?/';
+    private const REGEX_MULTILINE_COMMENT     = '~/\*.*?\*/|<!--.*?-->|\{-.*?-\}|\(\*.*?\*\)|""".*?"""|\'\'\'.*?\'\'\'~s';
+    private const REGEX_SINGLE_LINE_COMMENT   = '~^(?://|--|#|%|")\s(?:[^\n]*$)~m';
+    private const REGEX_PUNCTUATION           = '/;|\{|\}|\(|\)|\[|\]/';
+    private const REGEX_LITERAL_NUMBER        = '/(^|\h|<<?|\+|\-|\*|\/|%|:|&&?|\|\|?)(?:0x[0-9A-Fa-f](?:[0-9A-Fa-f]|\.)*|\d(?:\d|\.)*)(?:[uU][lL]{0,2}|(?:[eE][-+]\d*)?[fFlL]*)/';
+    private const REGEX_REGULAR_TOKEN         = '/[0-9A-Za-z_\.@#\/\*]+/';
+    private const REGEX_OPERATOR              = '/<<?|\+|\-|\*|\/|%|&&?|\|\|?/';
 
     /**
      * @return string[]
      */
-    public function extractTokens(string $content): array
+    public function extractTokens(string $content) : array
     {
         $tokens = [];
         // Shebang
         $content = (string) preg_replace_callback(
             self::REGEX_SHEBANG_WITH_ENV,
-            function ($matches) use (&$tokens) {
+            static function ($matches) use (&$tokens) {
                 $match = strrchr($matches[0], ' ');
                 if ($match === false) {
                     $match = $matches[0];
@@ -45,7 +51,7 @@ final class Tokenizer
         );
         $content = (string) preg_replace_callback(
             self::REGEX_SHEBANG,
-            function ($matches) use (&$tokens) {
+            static function ($matches) use (&$tokens) {
                 $match = strrchr($matches[0], '/');
                 if ($match === false) {
                     $match = $matches[0];
@@ -63,7 +69,7 @@ final class Tokenizer
         // SGML
         $content = (string) preg_replace_callback(
             self::REGEX_SGML,
-            function ($matches) use (&$tokens) {
+            static function ($matches) use (&$tokens) {
                 if (preg_match(self::REGEX_SGML_COMMENT, $matches[0]) === 1) {
                     return ' ';
                 }
@@ -72,7 +78,7 @@ final class Tokenizer
                 // Attributes
                 preg_replace_callback(
                     self::REGEX_SGML_ATTRIBUTE,
-                    function ($matches) use (&$tokens) {
+                    static function ($matches) use (&$tokens) {
                         if ($matches[1] !== '') {
                             $tokens[] = $matches[1];
                         }
@@ -101,11 +107,11 @@ final class Tokenizer
         );
 
         // Punctuations
-        $match_and_replace_callback = function (array $matches) use (&$tokens): string {
+        $match_and_replace_callback = static function (array $matches) use (&$tokens) : string {
             $tokens[] = $matches[0];
             return ' ';
         };
-        $content = (string) preg_replace_callback(
+        $content                    = (string) preg_replace_callback(
             self::REGEX_PUNCTUATION,
             $match_and_replace_callback,
             $content
@@ -114,7 +120,7 @@ final class Tokenizer
         // Skip literal number
         $content = (string) preg_replace_callback(
             self::REGEX_LITERAL_NUMBER,
-            function ($matches) {
+            static function ($matches) {
                 return $matches[1] . ' ';
             },
             $content

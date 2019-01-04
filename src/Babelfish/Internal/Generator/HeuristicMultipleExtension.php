@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Babelfish\Internal\Generator;
 
-final class HeuristicMultipleExtensionException extends \RuntimeException
+use RuntimeException;
+
+final class HeuristicMultipleExtension extends RuntimeException
 {
     public function __construct(string $extension)
     {

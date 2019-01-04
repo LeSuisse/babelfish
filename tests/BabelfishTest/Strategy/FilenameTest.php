@@ -12,26 +12,26 @@ use PHPUnit\Framework\TestCase;
 
 class FilenameTest extends TestCase
 {
-    public function testSourceFileWithAKnownFilename(): void
+    public function testSourceFileWithAKnownFilename() : void
     {
         $source_file = $this->createMock(SourceFile::class);
         $source_file->method('getName')->willReturn('composer.lock');
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $pass_out_filter->method('filter')->willReturnCallback(
-            function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) {
                 return $found_languages;
             }
         );
 
-        $strategy = new Filename($pass_out_filter);
+        $strategy  = new Filename($pass_out_filter);
         $languages = $strategy->getLanguages($source_file);
 
         $this->assertCount(1, $languages);
         $this->assertSame('JSON', $languages[0]->getName());
     }
 
-    public function testSourceFileWithAnUnknownFilename(): void
+    public function testSourceFileWithAnUnknownFilename() : void
     {
         $source_file = $this->createMock(SourceFile::class);
         $source_file->method('getName')->willReturn('filename');

@@ -15,19 +15,19 @@ class ExtensionTest extends TestCase
     /**
      * @dataProvider filenamesExtensionProvider
      */
-    public function testSourceFileExtension(?string $language_name, string $filename): void
+    public function testSourceFileExtension(?string $language_name, string $filename) : void
     {
         $source_file = $this->createMock(SourceFile::class);
         $source_file->method('getName')->willReturn($filename);
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $pass_out_filter->method('filter')->willReturnCallback(
-            function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) {
                 return $found_languages;
             }
         );
 
-        $strategy = new Extension($pass_out_filter);
+        $strategy  = new Extension($pass_out_filter);
         $languages = $strategy->getLanguages($source_file);
 
         if ($language_name === null) {
@@ -38,7 +38,10 @@ class ExtensionTest extends TestCase
         }
     }
 
-    public function filenamesExtensionProvider(): array
+    /**
+     * @return <string|string>[]
+     */
+    public function filenamesExtensionProvider() : array
     {
         return [
             ['PHP', 'test.php3'],

@@ -5,21 +5,28 @@ declare(strict_types=1);
 namespace Babelfish\Internal\Generator;
 
 use Babelfish\Internal\Parser\Parser;
+use function str_replace;
+use function strtolower;
 
 final class Alias implements Generator
 {
     use GetContentFromLinguistFileTrait;
 
+    /** @var string */
     private $linguist_file;
+    /** @var Parser */
     private $parser;
 
     public function __construct(string $linguist_file, Parser $parser)
     {
         $this->linguist_file = $linguist_file;
-        $this->parser = $parser;
+        $this->parser        = $parser;
     }
 
-    public function generate(string $linguist_repo_path): array
+    /**
+     * @return <string|string>[]
+     */
+    public function generate(string $linguist_repo_path) : array
     {
         $languages = $this->parser->getParsedContent(
             $this->getContent($linguist_repo_path, $this->linguist_file)
@@ -40,7 +47,7 @@ final class Alias implements Generator
         return $exported_aliases;
     }
 
-    private function formatKey(string $alias): string
+    private function formatKey(string $alias) : string
     {
         return str_replace(' ', '-', strtolower($alias));
     }
