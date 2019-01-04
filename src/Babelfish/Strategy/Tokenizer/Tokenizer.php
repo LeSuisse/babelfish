@@ -8,17 +8,17 @@ final class Tokenizer
 {
     private const SHEBANG_TOKEN = 'SHEBANG#!';
 
-    private const REGEX_SHEBANG_WITH_ENV = '/^#![ \t]*([[:alnum:]_\/]*\/)?env([ \t]+([^ \t=]*=[^ \t]*))*[ \t]+[[:alpha:]_]+/';
+    private const REGEX_SHEBANG_WITH_ENV = '/^#![ \t]*(?:[[:alnum:]_\/]*\/)?env(?:[ \t]+(?:[^ \t=]*=[^ \t]*))*[ \t]+[[:alpha:]_]+/';
     private const REGEX_SHEBANG = '/^#![ \t]*[[:alpha:]_\/]+/';
-    private const REGEX_SGML = '/(<\/?[^\s<>=\d"\']+)(?:\s(.|\n)*?\/?>|>)/';
-    private const REGEX_SGML_COMMENT = '<!--(.|\n)*?-->';
+    private const REGEX_SGML = '/(<\/?[^\s<>=\d"\']+)(\s.*?\/?>|>)/s';
+    private const REGEX_SGML_COMMENT = '/<!--.*?-->/s';
     private const REGEX_SGML_ATTRIBUTE = '/\s+(\w+=)|\s+([^\s>]+)/';
     private const REGEX_SGML_LONE_ATTRIBUTE = '/^\w+$/';
-    private const REGEX_LITERAL_STRING_QUOTES = '/"(?:.|\n)*?(?<!\\\\)(?:"|$)|\'(?:.|\n)*?(?<!\\\\)(?:\'|$)/';
-    private const REGEX_MULTILINE_COMMENT = '~/\*(.|\n)*?\*/|<!--(.|\n)*?-->|\{-(.|\n)*?-\}|\(\*(.|\n)*?\*\)|"""(.|\n)*?"""|\'\'\'(.|\n)*?\'\'\'~';
-    private const REGEX_SINGLE_LINE_COMMENT = '~^(//|--|#|%|")\s([^\n]*$)~m';
+    private const REGEX_LITERAL_STRING_QUOTES = '/".*?(?<!\\\\)(?:"|$)|\'.*?(?<!\\\\)(?:\'|$)/s';
+    private const REGEX_MULTILINE_COMMENT = '~/\*.*?\*/|<!--.*?-->|\{-.*?-\}|\(\*.*?\*\)|""".*?"""|\'\'\'.*?\'\'\'~s';
+    private const REGEX_SINGLE_LINE_COMMENT = '~^(?://|--|#|%|")\s(?:[^\n]*$)~m';
     private const REGEX_PUNCTUATION = '/;|\{|\}|\(|\)|\[|\]/';
-    private const REGEX_LITERAL_NUMBER = '/(^|\h|<<?|\+|\-|\*|\/|%|:|&&?|\|\|?)(0x[0-9A-Fa-f]([0-9A-Fa-f]|\.)*|\d(\d|\.)*)([uU][lL]{0,2}|([eE][-+]\d*)?[fFlL]*)/';
+    private const REGEX_LITERAL_NUMBER = '/(^|\h|<<?|\+|\-|\*|\/|%|:|&&?|\|\|?)(?:0x[0-9A-Fa-f](?:[0-9A-Fa-f]|\.)*|\d(?:\d|\.)*)(?:[uU][lL]{0,2}|(?:[eE][-+]\d*)?[fFlL]*)/';
     private const REGEX_REGULAR_TOKEN = '/[0-9A-Za-z_\.@#\/\*]+/';
     private const REGEX_OPERATOR = '/<<?|\+|\-|\*|\/|%|&&?|\|\|?/';
 

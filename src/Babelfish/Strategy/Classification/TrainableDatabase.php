@@ -31,7 +31,11 @@ final class TrainableDatabase implements Database
         $this->db['languages'][$train_sample->getLanguageName()] += 1;
         $this->db['languages_total'] += 1;
 
-        $tokens = $tokenizer->extractTokens($train_sample->getContent());
+        try {
+            $tokens = $tokenizer->extractTokens($train_sample->getContent());
+        } catch (\RuntimeException $ex) {
+            var_dump($train_sample->getContent());
+        }
         foreach ($tokens as $token) {
             $this->db['tokens_total'] += 1;
 
