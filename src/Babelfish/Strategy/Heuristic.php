@@ -90,8 +90,8 @@ final class Heuristic implements Strategy
             return preg_match($rule['positive'], $data) === 1;
         }
 
-        if (isset($rules['negative'])) {
-            return preg_match($rule['positive'], $data) === 0;
+        if (isset($rule['negative'])) {
+            return preg_match($rule['negative'], $data) === 0;
         }
 
         return true;
