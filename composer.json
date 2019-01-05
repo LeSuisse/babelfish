@@ -28,8 +28,5 @@
         "psr-4": {
             "BabelfishTest\\": "tests/BabelfishTest"
         }
-    },
-    "scripts": {
-        "code-generate": "scripts/dump-data"
     }
 }
