@@ -108,9 +108,13 @@ final class Classifier implements Strategy
 
     private function getTokenProbability(string $language_name, string $token) : float
     {
-        $token_nb = $this->database->getTokens($language_name, $token) ?? 1;
+        $token_nb = $this->database->getTokens($language_name, $token);
 
-        return $token_nb / $this->database->getTotalTokens();
+        if ($token_nb === null) {
+            return 1 / $this->database->getTotalTokens();
+        }
+
+        return $token_nb / $this->database->getLanguageTokens($language_name);
     }
 
     private function getLanguageProbability(string $language_name) : float
