@@ -1,4 +1,4 @@
-# Babelfish
+# Babelfish [![Latest Stable Version](https://poser.pugx.org/tgerbet/babelfish/v/stable)](https://packagist.org/packages/tgerbet/babelfish) [![Build Status](https://travis-ci.com/LeSuisse/babelfish.svg?branch=master)](https://travis-ci.com/LeSuisse/babelfish)
 
 Babelfish is a file programming language detector based on [github/linguist](https://github.com/github/linguist) and
 [src-d/enry](https://github.com/src-d/enry).
