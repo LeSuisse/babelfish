@@ -153,6 +153,7 @@ final class Heuristic implements Generator
             $pattern = $pattern_rule;
         }
         if (isset(self::HARDCODED_PATTERN_REPLACEMENT[$pattern])) {
+            /** @var string $pattern */
             $pattern = self::HARDCODED_PATTERN_REPLACEMENT[$pattern];
         }
 
