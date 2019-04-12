@@ -38,9 +38,8 @@ final class Heuristic implements Strategy
         }
         /**
          * @psalm-var array<string, array{positive: string, negative: string, and: array<string, array{positive: string, negative: string}>}> $heuristics
-         * @psalm-suppress MixedArrayAccess
          */
-        $heuristics = $heuristics_indexed_by_extension[$file_extension];
+        $heuristics = $heuristics_indexed_by_extension[$file_extension] ?? [];
 
         $languages = [];
         $data      = $this->getDataToAnalyze($file);
