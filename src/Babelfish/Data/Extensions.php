@@ -1,7 +1,7 @@
 <?php
 
 // Generated code, DO NOT EDIT
-// Extracted from github/linguist fa493000a594f5fbd457bbd473ce791d95b227cc
+// Extracted from github/linguist 3feaaabfa16449d53ba3933f8bfba021d093bc6d
 
 return array (
   '.bsl' => 
@@ -205,6 +205,11 @@ return array (
   '.nasm' => 
   array (
     0 => 'Assembly',
+  ),
+  '.asy' => 
+  array (
+    0 => 'Asymptote',
+    1 => 'LTspice Symbol',
   ),
   '.aug' => 
   array (
@@ -464,6 +469,10 @@ return array (
   array (
     0 => 'CWeb',
     1 => 'OpenEdge ABL',
+  ),
+  '.cabal' => 
+  array (
+    0 => 'Cabal Config',
   ),
   '.capnp' => 
   array (
@@ -1234,6 +1243,10 @@ return array (
   array (
     0 => 'Gherkin',
   ),
+  '.gitconfig' => 
+  array (
+    0 => 'Git Config',
+  ),
   '.glf' => 
   array (
     0 => 'Glyph',
@@ -1539,6 +1552,10 @@ return array (
   array (
     0 => 'Idris',
   ),
+  '.gitignore' => 
+  array (
+    0 => 'Ignore List',
+  ),
   '.ni' => 
   array (
     0 => 'Inform 7',
@@ -1590,6 +1607,15 @@ return array (
   '.gltf' => 
   array (
     0 => 'JSON',
+  ),
+  '.har' => 
+  array (
+    0 => 'JSON',
+  ),
+  '.ice' => 
+  array (
+    0 => 'JSON',
+    1 => 'Slice',
   ),
   '.JSON-tmLanguage' => 
   array (
@@ -1792,6 +1818,14 @@ return array (
   '.iol' => 
   array (
     0 => 'Jolie',
+  ),
+  '.jsonnet' => 
+  array (
+    0 => 'Jsonnet',
+  ),
+  '.libsonnet' => 
+  array (
+    0 => 'Jsonnet',
   ),
   '.jl' => 
   array (
@@ -2092,6 +2126,10 @@ return array (
     0 => 'Markdown',
   ),
   '.mdwn' => 
+  array (
+    0 => 'Markdown',
+  ),
+  '.mdx' => 
   array (
     0 => 'Markdown',
   ),
@@ -3060,6 +3098,10 @@ return array (
   array (
     0 => 'RenderScript',
   ),
+  '.rtf' => 
+  array (
+    0 => 'Rich Text Format',
+  ),
   '.ring' => 
   array (
     0 => 'Ring',
@@ -3075,74 +3117,102 @@ return array (
   '.1' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.1in' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.1m' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.1x' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.2' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.3' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.3in' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.3m' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
+  ),
+  '.3p' => 
+  array (
+    0 => 'Roff',
+    1 => 'Roff Manpage',
+  ),
+  '.3pm' => 
+  array (
+    0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.3qt' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.3x' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.4' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.5' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.6' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.7' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.8' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.9' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.man' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.mdoc' => 
   array (
     0 => 'Roff',
+    1 => 'Roff Manpage',
   ),
   '.me' => 
   array (
@@ -3419,10 +3489,6 @@ return array (
   '.sl' => 
   array (
     0 => 'Slash',
-  ),
-  '.ice' => 
-  array (
-    0 => 'Slice',
   ),
   '.slim' => 
   array (
@@ -3779,6 +3845,15 @@ return array (
   array (
     0 => 'Vim script',
   ),
+  '.vba' => 
+  array (
+    0 => 'Vim script',
+    1 => 'Visual Basic',
+  ),
+  '.vmb' => 
+  array (
+    0 => 'Vim script',
+  ),
   '.vb' => 
   array (
     0 => 'Visual Basic',
@@ -3792,10 +3867,6 @@ return array (
     0 => 'Visual Basic',
   ),
   '.frx' => 
-  array (
-    0 => 'Visual Basic',
-  ),
-  '.vba' => 
   array (
     0 => 'Visual Basic',
   ),
@@ -4375,6 +4446,10 @@ return array (
   array (
     0 => 'Zephir',
   ),
+  '.zig' => 
+  array (
+    0 => 'Zig',
+  ),
   '.zimpl' => 
   array (
     0 => 'Zimpl',
@@ -4411,9 +4486,17 @@ return array (
   array (
     0 => 'fish',
   ),
+  '.mcfunction' => 
+  array (
+    0 => 'mcfunction',
+  ),
   '.mu' => 
   array (
     0 => 'mupad',
+  ),
+  '.nanorc' => 
+  array (
+    0 => 'nanorc',
   ),
   '.nc' => 
   array (

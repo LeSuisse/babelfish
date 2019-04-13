@@ -59,11 +59,13 @@ class ClassifierTest extends TestCase
     {
         // Whitelisting incorrectly classified languages for now
         $failure_whitelist = [
-            'unmanaged-notify-puppet25.pp' => 'Pascal',
-            'NiAlH_jea.eam.fs' => 'Forth',
-            'hello.blade.php' => 'Hack',
-            'fixes.inc' => 'C++',
-            'nimfix.nim.cfg' => 'INI',
+            'block-sync-counter8.ice' => 'JSON',
+            'unmanaged-notify-puppet25.pp' => 'Puppet',
+            'NiAlH_jea.eam.fs' => 'Formatted',
+            'hello.blade.php' => 'Blade',
+            'fixes.inc' => 'Pawn',
+            'nimfix.nim.cfg' => 'Nim',
+            'tan.3m' => 'Roff Manpage',
         ];
 
         $classifier = new Classifier(new Tokenizer(), new CachedDatabase());

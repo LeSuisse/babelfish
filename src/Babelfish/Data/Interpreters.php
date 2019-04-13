@@ -1,7 +1,7 @@
 <?php
 
 // Generated code, DO NOT EDIT
-// Extracted from github/linguist fa493000a594f5fbd457bbd473ce791d95b227cc
+// Extracted from github/linguist 3feaaabfa16449d53ba3933f8bfba021d093bc6d
 
 return array (
   'apl' => 
@@ -19,6 +19,10 @@ return array (
   'osascript' => 
   array (
     0 => 'AppleScript',
+  ),
+  'asy' => 
+  array (
+    0 => 'Asymptote',
   ),
   'awk' => 
   array (

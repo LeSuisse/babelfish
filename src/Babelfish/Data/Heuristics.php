@@ -1,9 +1,409 @@
 <?php
 
 // Generated code, DO NOT EDIT
-// Extracted from github/linguist fa493000a594f5fbd457bbd473ce791d95b227cc
+// Extracted from github/linguist 3feaaabfa16449d53ba3933f8bfba021d093bc6d
 
 return array (
+  '.1' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.1in' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.1m' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.1x' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.2' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3in' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3m' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3p' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3pm' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3qt' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.3x' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.4' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.5' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.6' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.7' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.8' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.9' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.man' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
+  '.mdoc' => 
+  array (
+    'Roff Manpage' => 
+    array (
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*TH +(?:[^"\\s]+|"[^"]+") +"?(?:[1-9]|@[^\\s@]+@)/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/^[.\'][ \\t]*SH +(?:[^"\\s]+|"[^"\\s]+)/m',
+        ),
+      ),
+    ),
+    'Roff' => 
+    array (
+    ),
+  ),
   '.as' => 
   array (
     'ActionScript' => 
@@ -27,6 +427,16 @@ return array (
     'AGS Script' => 
     array (
       'positive' => '/^(\\/\\/.+|((import|export)\\s+)?(function|int|float|char)\\s+((room|repeatedly|on|game)_)?([A-Za-z]+[A-Za-z_0-9]+)\\s*[;\\(])/m',
+    ),
+  ),
+  '.asy' => 
+  array (
+    'LTspice Symbol' => 
+    array (
+      'positive' => '/^SymbolType[ \\t]/m',
+    ),
+    'Asymptote' => 
+    array (
     ),
   ),
   '.bb' => 
@@ -102,7 +512,7 @@ return array (
     ),
     'Makefile' => 
     array (
-      'positive' => '/([\\/\\\\].*:\\s+.*\\s\\\\$|: \\\\$|^ : |^[\\w\\s\\/\\\\.]+\\w+\\.\\w+\\s*:\\s+[\\w\\s\\/\\\\.]+\\w+\\.\\w+)/m',
+      'positive' => '/([\\/\\\\].*:\\s+.*\\s\\\\$|: \\\\$|^[ %]:|^[\\w\\s\\/\\\\.]+\\w+\\.\\w+\\s*:\\s+[\\w\\s\\/\\\\.]+\\w+\\.\\w+)/m',
     ),
   ),
   '.ecl' => 
@@ -184,6 +594,17 @@ return array (
       'positive' => '/#include|#pragma\\s+(rs|version)|__attribute__/m',
     ),
   ),
+  '.gd' => 
+  array (
+    'GAP' => 
+    array (
+      'positive' => '/\\s*(Declare|BindGlobal|KeyDependentOperation)/m',
+    ),
+    'GDScript' => 
+    array (
+      'positive' => '/\\s*(extends|var|const|enum|func|class|signal|tool|yield|assert|onready)/m',
+    ),
+  ),
   '.gml' => 
   array (
     'XML' => 
@@ -223,13 +644,12 @@ return array (
   ),
   '.ice' => 
   array (
-    'Slice' => 
-    array (
-      'positive' => '/^\\s*(#\\s*(include|if[n]def|pragma)|module\\s+[A-Za-z][_A-Za-z0-9]*)/m',
-    ),
     'JSON' => 
     array (
       'positive' => '/\\A\\s*[{\\[]/m',
+    ),
+    'Slice' => 
+    array (
     ),
   ),
   '.inc' => 
@@ -313,7 +733,17 @@ return array (
     ),
     'Mathematica' => 
     array (
-      'positive' => '/\\*\\)$/m',
+      'and' => 
+      array (
+        0 => 
+        array (
+          'positive' => '/\\(\\*/m',
+        ),
+        1 => 
+        array (
+          'positive' => '/\\*\\)$/m',
+        ),
+      ),
     ),
     'MATLAB' => 
     array (
@@ -450,7 +880,7 @@ return array (
     'Perl 6' => 
     array (
     ),
-    'XPM' => 
+    'X PixMap' => 
     array (
       'positive' => '/^\\s*\\/\\* XPM \\*\\//m',
     ),
@@ -532,7 +962,7 @@ return array (
   array (
     'XML' => 
     array (
-      'positive' => '/^(\\s*)(?i:<Project|<Import|<Property|<?xml|xmlns)/m',
+      'positive' => '/^(\\s*)(?i:<Project|<Import|<Property|<\\?xml|xmlns)/m',
     ),
     'INI' => 
     array (
@@ -685,6 +1115,16 @@ return array (
       'positive' => '/(?i:^\\s*<\\?xml\\s+version)/m',
     ),
   ),
+  '.vba' => 
+  array (
+    'Vim script' => 
+    array (
+      'positive' => '/^UseVimball/m',
+    ),
+    'Visual Basic' => 
+    array (
+    ),
+  ),
   '.w' => 
   array (
     'OpenEdge ABL' => 
@@ -706,7 +1146,7 @@ return array (
     array (
       'positive' => '/^%(end|ctor|hook|group)\\b/m',
     ),
-    'Linked Script' => 
+    'Linker Script' => 
     array (
       'positive' => '/OUTPUT_ARCH\\(|OUTPUT_FORMAT\\(|SECTIONS/m',
     ),
