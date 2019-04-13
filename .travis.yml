@@ -2,6 +2,9 @@ language: php
 
 sudo: false
 
+git:
+  submodules: false
+
 php:
   - 7.2
   - 7.3
@@ -11,6 +14,9 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: 7.4snapshot
+
+before_install:
+  - git submodule update --init
 
 install:
   - travis_retry composer install --no-interaction
