@@ -33,7 +33,7 @@ jobs:
       php: 7.2
       script:
         - ./vendor/bin/phpcs
-        - ./vendor/bin/psalm
+        - ./vendor/bin/psalm --shepherd
       git:
         submodules: false
 
