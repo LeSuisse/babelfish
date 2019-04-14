@@ -6,6 +6,8 @@ namespace BabelfishTest;
 
 use Babelfish\Babelfish;
 use Babelfish\File\ContentFile;
+use Babelfish\Language;
+use Babelfish\Strategy\Strategy;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -327,5 +329,26 @@ class BabelfishTest extends TestCase
             $this->assertNotNull($language);
             $this->assertEquals($expected_language_name, $language->getName());
         }
+    }
+
+    public function testLanguagesCanNotBeFound() : void
+    {
+        $babelfish = new Babelfish();
+
+        $source_file = new ContentFile('mytestfile.test', 'content');
+
+        $this->assertNull($babelfish->getLanguage($source_file));
+    }
+
+    public function testOnlyReturnsTheMostProbableLanguage() : void
+    {
+        $strategy   = $this->createMock(Strategy::class);
+        $language_0 = $this->createMock(Language::class);
+        $strategy->method('getLanguages')->willReturn([$language_0, $this->createMock(Language::class)]);
+        $babelfish = new Babelfish($strategy);
+
+        $source_file = new ContentFile('mytestfile.test', 'content');
+
+        $this->assertSame($language_0, $babelfish->getLanguage($source_file));
     }
 }

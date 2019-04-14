@@ -6,6 +6,9 @@
         colors="true"
         verbose="true"
 >
+<php>
+        <ini name="memory_limit" value="3024M" /> <!-- This needs to be quite permissive to be able to generate coverage report -->
+    </php>
     <testsuites>
         <testsuite name="unit">
             <directory>./tests/BabelfishTest/</directory>
