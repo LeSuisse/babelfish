@@ -31,6 +31,8 @@ class TokenizerTest extends TestCase
 
     /**
      * @return <string|string[]>[]
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function tokensDataProvider() : array
     {

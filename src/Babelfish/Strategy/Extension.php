@@ -19,6 +19,7 @@ final class Extension implements Strategy
     {
         $this->filter = $filter;
     }
+
     /**
      * @return Language[]
      */
@@ -41,6 +42,7 @@ final class Extension implements Strategy
         }
 
         $languages = Language::findLanguagesByExtension('.' . $extension);
+
         return $this->filter->filter($language_candidates, ...$languages);
     }
 }

@@ -65,6 +65,7 @@ final class Heuristic implements Strategy
                 break;
             }
         }
+
         return substr($data, 0, self::HEURISTICS_CONSIDER_BYTES);
     }
 

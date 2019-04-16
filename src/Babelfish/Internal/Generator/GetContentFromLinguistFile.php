@@ -7,7 +7,7 @@ namespace Babelfish\Internal\Generator;
 use SplFileObject;
 use function file_exists;
 
-trait GetContentFromLinguistFileTrait
+trait GetContentFromLinguistFile
 {
     private function getContent(string $linguist_repo_path, string $linguist_file) : string
     {

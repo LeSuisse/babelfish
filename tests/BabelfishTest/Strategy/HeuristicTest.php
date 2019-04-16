@@ -40,6 +40,8 @@ class HeuristicTest extends TestCase
 
     /**
      * @return <SourceFile|string[]>[]
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function heuristicDataProvider() : array
     {
@@ -339,6 +341,8 @@ class HeuristicTest extends TestCase
 
     /**
      * @return <SourceFile|string>[]
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function ambiguousFileDataProvider() : array
     {
@@ -350,11 +354,14 @@ class HeuristicTest extends TestCase
                 }
             }
         }
+
         return $files_to_provide;
     }
 
     /**
      * @return <string|string<string|bool>[]>[]
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     private function getAmbiguousFile() : array
     {

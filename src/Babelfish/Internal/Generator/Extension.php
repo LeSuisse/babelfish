@@ -8,7 +8,7 @@ use Babelfish\Internal\Parser\Parser;
 
 final class Extension implements Generator
 {
-    use GetContentFromLinguistFileTrait;
+    use GetContentFromLinguistFile;
 
     /** @var string */
     private $linguist_file;

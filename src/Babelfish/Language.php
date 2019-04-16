@@ -34,6 +34,7 @@ class Language
         if ($language_name === null) {
             return null;
         }
+
         return new self($language_name);
     }
 
@@ -49,6 +50,7 @@ class Language
         if ($language_name === null) {
             return null;
         }
+
         return new self($language_name);
     }
 
@@ -68,6 +70,7 @@ class Language
         foreach ($languages_name as $language_name) {
             $languages[] = new self($language_name);
         }
+
         return $languages;
     }
 
@@ -87,6 +90,7 @@ class Language
         foreach ($languages_name as $language_name) {
             $languages[] = new self($language_name);
         }
+
         return $languages;
     }
 }

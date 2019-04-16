@@ -30,6 +30,7 @@ final class XML implements Strategy
             if ($xml_language === null) {
                 throw new ExpectedLanguageNotFound('XML');
             }
+
             return [$xml_language];
         }
 

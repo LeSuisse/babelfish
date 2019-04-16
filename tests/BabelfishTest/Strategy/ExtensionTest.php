@@ -40,6 +40,8 @@ class ExtensionTest extends TestCase
 
     /**
      * @return <string|string>[]
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function filenamesExtensionProvider() : array
     {

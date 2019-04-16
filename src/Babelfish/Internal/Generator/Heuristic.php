@@ -12,7 +12,7 @@ use function preg_match;
 
 final class Heuristic implements Generator
 {
-    use GetContentFromLinguistFileTrait;
+    use GetContentFromLinguistFile;
 
     private const REGEX_DELIMITER               = '/';
     private const HARDCODED_PATTERN_REPLACEMENT = [
@@ -92,6 +92,7 @@ final class Heuristic implements Generator
                 $disambiguations_by_extension[$extension] = $parsed_rules_by_language;
             }
         }
+
         return $disambiguations_by_extension;
     }
 
@@ -139,6 +140,7 @@ final class Heuristic implements Generator
                 $this->getPattern([$this->getPattern($rule['pattern']), $named_pattern])
             );
         }
+
         return null;
     }
 

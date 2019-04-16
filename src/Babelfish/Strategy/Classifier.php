@@ -49,6 +49,7 @@ final class Classifier implements Strategy
         $sorted_language_names = $this->classify($data_to_analyze, $language_names);
 
         reset($sorted_language_names);
+
         return [$language_candidates_by_name[key($sorted_language_names)]];
     }
 
@@ -61,6 +62,7 @@ final class Classifier implements Strategy
                 break;
             }
         }
+
         return substr($data, 0, self::CLASSIFIER_CONSIDER_BYTES);
     }
 

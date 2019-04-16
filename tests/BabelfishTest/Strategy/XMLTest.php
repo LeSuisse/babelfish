@@ -30,8 +30,10 @@ class XMLTest extends TestCase
 
     /**
      * @return <bool|SourceFile>[]
+     *
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
-    public function XMLFileProviders()
+    public function XMLFileProviders() : array
     {
         return [
             [false, LinguistData::getSampleSourceFile('XML/libsomething.dll.config')],

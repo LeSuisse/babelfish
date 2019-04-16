@@ -46,6 +46,7 @@ final class Tokenizer
                     $match = substr($match, 1);
                 }
                 $tokens[] = self::SHEBANG_TOKEN . $match;
+
                 return ' ';
             },
             $content
@@ -63,6 +64,7 @@ final class Tokenizer
                 if ($match !== 'env') {
                     $tokens[] = self::SHEBANG_TOKEN . $match;
                 }
+
                 return ' ';
             },
             $content
@@ -93,6 +95,7 @@ final class Tokenizer
                     },
                     (string) $matches[0]
                 );
+
                 return ' ';
             },
             $content
@@ -114,6 +117,7 @@ final class Tokenizer
              * @var string[] $matches
              */
             $tokens[] = $matches[0];
+
             return ' ';
         };
         $content                    = (string) preg_replace_callback(

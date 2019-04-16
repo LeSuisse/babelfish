@@ -31,6 +31,7 @@ class Babelfish
     public static function getWithDefaultStrategies() : self
     {
         $only_keep_language_already_candidate_filter = new OnlyKeepLanguageAlreadyCandidatesFilter();
+
         return new self(
             new Modeline($only_keep_language_already_candidate_filter),
             new Filename($only_keep_language_already_candidate_filter),
