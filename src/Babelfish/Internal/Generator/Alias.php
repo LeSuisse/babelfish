@@ -10,7 +10,7 @@ use function strtolower;
 
 final class Alias implements Generator
 {
-    use GetContentFromLinguistFileTrait;
+    use GetContentFromLinguistFile;
 
     /** @var string */
     private $linguist_file;

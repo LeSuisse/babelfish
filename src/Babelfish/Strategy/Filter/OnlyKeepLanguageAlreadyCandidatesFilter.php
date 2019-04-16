@@ -10,7 +10,6 @@ class OnlyKeepLanguageAlreadyCandidatesFilter
 {
     /**
      * @param Language[] $language_candidates
-     * @param Language   ...$found_languages
      *
      * @return Language[]
      */
@@ -33,6 +32,7 @@ class OnlyKeepLanguageAlreadyCandidatesFilter
 
             $filtered_languages[] = $found_language;
         }
+
         return $filtered_languages;
     }
 }

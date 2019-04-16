@@ -24,6 +24,7 @@ final class CachedDatabase implements Database
             /** @psalm-suppress MixedAssignment */
             $db = include __DIR__ . '/../../Data/ClassifierSamples.php';
         }
+
         /**
          * @psalm-var array{
          *      tokens_total: int,

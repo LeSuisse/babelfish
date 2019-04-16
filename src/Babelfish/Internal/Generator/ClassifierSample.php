@@ -15,7 +15,7 @@ use function dirname;
 
 final class ClassifierSample implements Generator
 {
-    use GetContentFromLinguistFileTrait;
+    use GetContentFromLinguistFile;
 
     /**
      * @return mixed[]
@@ -39,6 +39,7 @@ final class ClassifierSample implements Generator
         }
 
         $db = new TrainableDatabase(new Tokenizer(), ...$samples);
+
         return $db->getRawDatabase();
     }
 }
