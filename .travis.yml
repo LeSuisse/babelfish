@@ -2,6 +2,11 @@ language: php
 
 sudo: false
 
+addons:
+  apt:
+    packages:
+      - libonig-dev
+
 git:
   submodules: false
 
