@@ -11,6 +11,8 @@ final class HeuristicRuleMultiplePatterns extends RuntimeException
 {
     /**
      * @param string[] $rule
+     *
+     * @psalm-param array{named_pattern?: string, pattern?: string|string[], negative_pattern?: string|string[]} $rule
      */
     public function __construct(array $rule)
     {

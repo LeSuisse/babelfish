@@ -21,8 +21,7 @@ final class CachedDatabase implements Database
     {
         static $db = null;
         if ($db === null) {
-            /** @psalm-suppress MixedAssignment */
-            $db = include __DIR__ . '/../../Data/ClassifierSamples.php';
+            $db = (array) include __DIR__ . '/../../Data/ClassifierSamples.php';
         }
 
         /**

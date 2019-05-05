@@ -34,7 +34,7 @@ final class Heuristic implements Generator
     /**
      * @return mixed[]
      *
-     * @psalm-return array<mixed, array<mixed, array{positive?:string, negative?:string, and?:array<int, array{positive?:string, negative?:string}>}>>
+     * @psalm-return array<mixed, array<mixed, array{positive?:string, negative?:string, and?:array<array{positive?: string, negative?: string}>}>>
      */
     public function generate(string $linguist_repo_path) : array
     {
@@ -59,16 +59,15 @@ final class Heuristic implements Generator
         }
 
         $disambiguations_by_extension = [];
-        /** @psalm-var array{rules: array<string, string[][]>, extensions: string[]} $disambiguation */
+        /** @psalm-var array{rules: mixed, extensions: string[]} $disambiguation */
         foreach ($heuristics['disambiguations'] as $disambiguation) {
             $parsed_rules_by_language = [];
+            /** @psalm-var array{and?: array<array{named_pattern?: string, pattern?: string|string[], negative_pattern?: string|string[]}>, language: string[]|string} $rule */
             foreach ($disambiguation['rules'] as $rule) {
-                /** @psalm-suppress InvalidArgument */
                 $parsed_rule = $this->getParsedPatterns($rule, $existing_named_patterns);
                 if (isset($rule['and'])) {
                     $parsed_rule['and'] = [];
                     foreach ($rule['and'] as $and_rule) {
-                        /** @psalm-suppress InvalidArgument */
                         $parsed_rule['and'][] = $this->getParsedPatterns($and_rule, $existing_named_patterns);
                     }
                 }
@@ -102,6 +101,7 @@ final class Heuristic implements Generator
      *
      * @return string[][]
      *
+     * @psalm-param array{named_pattern?: string, pattern?: string|string[], negative_pattern?: string|string[]} $rule
      * @psalm-return array{positive?: string, negative?: string}
      */
     private function getParsedPatterns(array $rule, array $existing_named_patterns) : array
@@ -125,6 +125,8 @@ final class Heuristic implements Generator
     /**
      * @param string[] $rule
      * @param string[] $existing_named_patterns
+     *
+     * @psalm-param array{named_pattern?: string, pattern?: string|string[]} $rule
      */
     private function getPositivePattern(array $rule, array $existing_named_patterns) : ?string
     {
