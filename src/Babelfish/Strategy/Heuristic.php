@@ -9,6 +9,7 @@ use Babelfish\Language;
 use const PATHINFO_EXTENSION;
 use function pathinfo;
 use function preg_match;
+use function strlen;
 use function strtolower;
 use function substr;
 
@@ -61,7 +62,7 @@ final class Heuristic implements Strategy
         $data = '';
         foreach ($file->getLines() as $line) {
             $data .= $line . "\n";
-            if ($data >= self::HEURISTICS_CONSIDER_BYTES) {
+            if (strlen($data) >= self::HEURISTICS_CONSIDER_BYTES) {
                 break;
             }
         }

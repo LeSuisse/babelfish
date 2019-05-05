@@ -11,6 +11,7 @@ use Babelfish\Strategy\Tokenizer\Tokenizer;
 use function key;
 use function log;
 use function reset;
+use function strlen;
 use function substr;
 use function uasort;
 
@@ -58,7 +59,7 @@ final class Classifier implements Strategy
         $data = '';
         foreach ($file->getLines() as $line) {
             $data .= $line . "\n";
-            if ($data >= self::CLASSIFIER_CONSIDER_BYTES) {
+            if (strlen($data) >= self::CLASSIFIER_CONSIDER_BYTES) {
                 break;
             }
         }
