@@ -13,15 +13,20 @@ class OnlyKeepLanguageAlreadyCandidatesFilterTest extends TestCase
     public function testFoundLanguagesNotAlreadyCandidatesAreFilteredOut() : void
     {
         $language_candidate_a = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_candidate_a->method('getName')->willReturn('A');
         $language_candidate_b = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_candidate_b->method('getName')->willReturn('B');
 
         $language_found_a = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_found_a->method('getName')->willReturn('A');
         $language_found_b = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_found_b->method('getName')->willReturn('B');
         $language_found_c = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_found_c->method('getName')->willReturn('C');
 
         $filter             = new OnlyKeepLanguageAlreadyCandidatesFilter();
@@ -38,8 +43,10 @@ class OnlyKeepLanguageAlreadyCandidatesFilterTest extends TestCase
     public function testAllFoundLanguagesAreReturnedWhenNoCandidate() : void
     {
         $language_found_a = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_found_a->method('getName')->willReturn('A');
         $language_found_b = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $language_found_b->method('getName')->willReturn('B');
 
         $filter             = new OnlyKeepLanguageAlreadyCandidatesFilter();

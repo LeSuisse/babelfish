@@ -15,11 +15,13 @@ class FilenameTest extends TestCase
     public function testSourceFileWithAKnownFilename() : void
     {
         $source_file = $this->createMock(SourceFile::class);
+        /** @psalm-suppress InternalMethod */
         $source_file->method('getName')->willReturn('composer.lock');
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) : array {
                 return $found_languages;
             }
         );
@@ -34,6 +36,7 @@ class FilenameTest extends TestCase
     public function testSourceFileWithAnUnknownFilename() : void
     {
         $source_file = $this->createMock(SourceFile::class);
+        /** @psalm-suppress InternalMethod */
         $source_file->method('getName')->willReturn('filename');
 
         $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);

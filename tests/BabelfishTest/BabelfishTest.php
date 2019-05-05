@@ -11,6 +11,7 @@ use Babelfish\Strategy\Strategy;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 use function array_key_exists;
 use function basename;
 use function dirname;
@@ -314,6 +315,7 @@ class BabelfishTest extends TestCase
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator  = new RecursiveIteratorIterator($directory);
+        /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
             if (array_key_exists($sample_file->getFilename(), self::INCORRECT_CLASSIFICATION)) {
                 continue;
@@ -344,6 +346,7 @@ class BabelfishTest extends TestCase
     {
         $strategy   = $this->createMock(Strategy::class);
         $language_0 = $this->createMock(Language::class);
+        /** @psalm-suppress InternalMethod */
         $strategy->method('getLanguages')->willReturn([$language_0, $this->createMock(Language::class)]);
         $babelfish = new Babelfish($strategy);
 

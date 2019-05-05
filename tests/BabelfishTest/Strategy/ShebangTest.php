@@ -22,11 +22,13 @@ class ShebangTest extends TestCase
     public function testSourceFileWithShebang(array $expected_language_names, string $file_content) : void
     {
         $file = $this->createMock(SourceFile::class);
+        /** @psalm-suppress InternalMethod */
         $file->method('getLines')->willReturn(explode("\n", $file_content));
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) : array {
                 return $found_languages;
             }
         );
@@ -38,7 +40,7 @@ class ShebangTest extends TestCase
         $this->assertSame(
             $expected_language_names,
             array_map(
-                static function (Language $language) {
+                static function (Language $language) : string {
                     return $language->getName();
                 },
                 $languages
@@ -49,6 +51,7 @@ class ShebangTest extends TestCase
     public function testAFileWithoutAnyLinesDoesNotFindAnyLanguage() : void
     {
         $file = $this->createMock(SourceFile::class);
+        /** @psalm-suppress InternalMethod */
         $file->method('getLines')->willReturn([]);
 
         $filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
@@ -60,7 +63,7 @@ class ShebangTest extends TestCase
     }
 
     /**
-     * @return <string[]|string>[]
+     * @return array<array{string[], string}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */

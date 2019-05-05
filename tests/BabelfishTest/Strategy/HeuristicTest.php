@@ -17,8 +17,7 @@ class HeuristicTest extends TestCase
     {
         $heuristic = new Heuristic();
         $languages = $heuristic->getLanguages(
-            LinguistData::getSampleSourceFile('JavaScript/namespace.js'),
-            ...[]
+            LinguistData::getSampleSourceFile('JavaScript/namespace.js')
         );
 
         $this->assertEmpty($languages);
@@ -33,14 +32,16 @@ class HeuristicTest extends TestCase
     {
         $language_candidates = [];
         foreach ($language_candidate_names as $language_candidate_name) {
-            $language_candidates[] = Language::findByAlias($language_candidate_name);
+            $language_candidate = Language::findByAlias($language_candidate_name);
+            $this->assertNotNull($language_candidate);
+            $language_candidates[] = $language_candidate;
         }
         $heuristic = new Heuristic();
         $this->assertSame($language_candidates, $heuristic->getLanguages($file, ...$language_candidates));
     }
 
     /**
-     * @return <SourceFile|string[]>[]
+     * @return array<array{SourceFile, string[]}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
@@ -336,18 +337,21 @@ class HeuristicTest extends TestCase
      */
     public function testAmbiguousFileAreNotWronglyDetected(SourceFile $file, string $language_candidate_name) : void
     {
-        $heuristic = new Heuristic();
-        $this->assertEmpty($heuristic->getLanguages($file, Language::findByAlias($language_candidate_name)));
+        $heuristic          = new Heuristic();
+        $language_candidate = Language::findByAlias($language_candidate_name);
+        $this->assertNotNull($language_candidate);
+        $this->assertEmpty($heuristic->getLanguages($file, $language_candidate));
     }
 
     /**
-     * @return <SourceFile|string>[]
+     * @return array<array{SourceFile, string}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function ambiguousFileDataProvider() : array
     {
         $files_to_provide = [];
+        /** @var array<string, string[]> $languages */
         foreach ($this->getAmbiguousFile() as $extension => $languages) {
             foreach ($languages as $language => $files) {
                 foreach ($files as $file => $v) {
@@ -360,7 +364,7 @@ class HeuristicTest extends TestCase
     }
 
     /**
-     * @return <string|string<string|bool>[]>[]
+     * @return array<string, array<string, array<string, true>>>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */

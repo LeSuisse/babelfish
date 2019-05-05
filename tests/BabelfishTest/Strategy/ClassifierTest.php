@@ -15,6 +15,7 @@ use BabelfishTest\LinguistData;
 use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 use function basename;
 use function count;
 use function dirname;
@@ -34,16 +35,20 @@ class ClassifierTest extends TestCase
 
         $classifier = new Classifier($tokenizer, $db);
 
+        $objective_c_language = Language::findByAlias('objc');
+        $this->assertNotNull($objective_c_language);
         $found_languages = $classifier->getLanguages(
             LinguistData::getSampleSourceFile('Objective-C/hello.m'),
-            Language::findByAlias('objc')
+            $objective_c_language
         );
         $this->assertCount(1, $found_languages);
         $this->assertEquals('Objective-C', $found_languages[0]->getName());
 
+        $ruby_language = Language::findByAlias('ruby');
+        $this->assertNotNull($ruby_language);
         $found_languages = $classifier->getLanguages(
             LinguistData::getSampleSourceFile('Objective-C/hello.m'),
-            Language::findByAlias('ruby')
+            $ruby_language
         );
         $this->assertCount(1, $found_languages);
         $this->assertEquals('Ruby', $found_languages[0]->getName());
@@ -72,6 +77,7 @@ class ClassifierTest extends TestCase
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator  = new RecursiveIteratorIterator($directory);
+        /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
             $filename = $sample_file->getFilename();
 

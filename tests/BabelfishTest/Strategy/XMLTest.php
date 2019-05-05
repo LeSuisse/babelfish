@@ -37,7 +37,7 @@ class XMLTest extends TestCase
     }
 
     /**
-     * @return <bool|SourceFile>[]
+     * @return array<array{bool, SourceFile}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */

@@ -18,11 +18,13 @@ class ExtensionTest extends TestCase
     public function testSourceFileExtension(?string $language_name, string $filename) : void
     {
         $source_file = $this->createMock(SourceFile::class);
+        /** @psalm-suppress InternalMethod */
         $source_file->method('getName')->willReturn($filename);
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) : array {
                 return $found_languages;
             }
         );
@@ -39,7 +41,7 @@ class ExtensionTest extends TestCase
     }
 
     /**
-     * @return <string|string>[]
+     * @return array<array{?string, string}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */

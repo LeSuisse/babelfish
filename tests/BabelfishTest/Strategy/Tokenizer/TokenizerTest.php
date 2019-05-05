@@ -30,7 +30,7 @@ class TokenizerTest extends TestCase
     }
 
     /**
-     * @return <string|string[]>[]
+     * @return array<array{string, string[]}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */

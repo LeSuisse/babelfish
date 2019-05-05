@@ -21,8 +21,9 @@ class ModelineTest extends TestCase
         $source_file = LinguistData::getFixtureSourceFile($linguist_fixture_path);
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
+        /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) {
+            static function (array $language_candidates, Language ...$found_languages) : array {
                 return $found_languages;
             }
         );
@@ -49,6 +50,7 @@ class ModelineTest extends TestCase
         $modeline = new Modeline($filter);
 
         $file = $this->createMock(SourceFile::class);
+        /** @psalm-suppress InternalMethod */
         $file->method('getLines')->willReturn(['/* vim: set filetype=not_known: */']);
 
         $languages = $modeline->getLanguages($file);
@@ -57,7 +59,7 @@ class ModelineTest extends TestCase
     }
 
     /**
-     * @return <string|string>[]
+     * @return array<array{string, string}>
      *
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
