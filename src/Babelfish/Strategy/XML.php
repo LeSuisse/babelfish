@@ -26,10 +26,12 @@ final class XML implements Strategy
         $header = implode('', array_slice($file->getLines(), 0, self::SEARCH_SCOPE));
 
         if (strpos($header, '<?xml version=') !== false) {
+            /**
+             * @see \BabelfishTest\Strategy\XMLTest::testXMLLanguageIsPresent
+             *
+             * @var Language $xml_language
+             */
             $xml_language = Language::findByAlias('XML');
-            if ($xml_language === null) {
-                throw new ExpectedLanguageNotFound('XML');
-            }
 
             return [$xml_language];
         }

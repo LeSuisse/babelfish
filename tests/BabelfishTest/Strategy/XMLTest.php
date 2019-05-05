@@ -12,6 +12,14 @@ use PHPUnit\Framework\TestCase;
 
 class XMLTest extends TestCase
 {
+    public function testXMLLanguageIsPresent() : void
+    {
+        $language = Language::findByAlias('XML');
+
+        $this->assertNotNull($language);
+        $this->assertEquals('XML', $language->getName());
+    }
+
     /**
      * @dataProvider XMLFileProviders
      */
