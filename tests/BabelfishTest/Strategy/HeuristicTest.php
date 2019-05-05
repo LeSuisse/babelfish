@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BabelfishTest\Strategy;
 
+use Babelfish\File\ContentFile;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Heuristic;
@@ -371,5 +372,13 @@ class HeuristicTest extends TestCase
             'ncl' => ['Text' => ['LIDARLite.ncl' => true]],
             'pp' => ['Puppet' => ['stages-example.pp' => true, 'hiera_include.pp' => true]],
         ];
+    }
+
+    public function testNoLanguagesCanBeDetectedByHeuristicWithoutExtension() : void
+    {
+        $heuristic = new Heuristic();
+        $languages = $heuristic->getLanguages(new ContentFile('no_extension', ''));
+
+        $this->assertEmpty($languages);
     }
 }
