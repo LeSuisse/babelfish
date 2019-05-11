@@ -1,7 +1,7 @@
 <?php
 
 // Generated code, DO NOT EDIT
-// Extracted from github/linguist 3feaaabfa16449d53ba3933f8bfba021d093bc6d
+// Extracted from github/linguist 9116c90fcbb82ac03b4b33c58cfbde1fcf745e99
 
 return array (
   '.bsl' => 
@@ -1446,6 +1446,10 @@ return array (
   array (
     0 => 'HTML+Razor',
   ),
+  '.razor' => 
+  array (
+    0 => 'HTML+Razor',
+  ),
   '.http' => 
   array (
     0 => 'HTTP',
@@ -1622,6 +1626,10 @@ return array (
     0 => 'JSON',
   ),
   '.jsonl' => 
+  array (
+    0 => 'JSON',
+  ),
+  '.mcmeta' => 
   array (
     0 => 'JSON',
   ),
@@ -4441,6 +4449,22 @@ return array (
   '.yacc' => 
   array (
     0 => 'Yacc',
+  ),
+  '.zap' => 
+  array (
+    0 => 'ZAP',
+  ),
+  '.xzap' => 
+  array (
+    0 => 'ZAP',
+  ),
+  '.zil' => 
+  array (
+    0 => 'ZIL',
+  ),
+  '.mud' => 
+  array (
+    0 => 'ZIL',
   ),
   '.zep' => 
   array (
