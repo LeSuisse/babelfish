@@ -549,6 +549,7 @@ return array (
     ),
     'Fortran' => 
     array (
+      'positive' => '/^(?i:[c*][^abd-z]|      (subroutine|program|end|data)\\s|\\s*!)/m',
     ),
   ),
   '.for' => 
@@ -559,6 +560,7 @@ return array (
     ),
     'Fortran' => 
     array (
+      'positive' => '/^(?i:[c*][^abd-z]|      (subroutine|program|end|data)\\s|\\s*!)/m',
     ),
   ),
   '.fr' => 
@@ -630,9 +632,11 @@ return array (
   array (
     'Objective-C' => 
     array (
+      'positive' => '/^\\s*(@(interface|class|protocol|property|end|synchronised|selector|implementation)\\b|#import\\s+.+\\.h[">])/m',
     ),
     'C++' => 
     array (
+      'positive' => '/^\\s*#\\s*include <(cstdint|string|vector|map|list|array|bitset|queue|stack|forward_list|unordered_map|unordered_set|(i|o|io)stream)>|^\\s*template\\s*<|^[ \\t]*(try|constexpr)|^[ \\t]*catch\\s*\\(|^[ \\t]*(class|(using[ \\t]+)?namespace)\\s+\\w+|^[ \\t]*(private|public|protected):$|std::\\w+/m',
     ),
   ),
   '.hh' => 
@@ -718,6 +722,7 @@ return array (
   array (
     'Objective-C' => 
     array (
+      'positive' => '/^\\s*(@(interface|class|protocol|property|end|synchronised|selector|implementation)\\b|#import\\s+.+\\.h[">])/m',
     ),
     'Mercury' => 
     array (
@@ -867,18 +872,22 @@ return array (
     ),
     'Perl' => 
     array (
+      'positive' => '/\\buse\\s+(?:strict\\b|v?5\\.)/m',
     ),
     'Perl 6' => 
     array (
+      'positive' => '/^\\s*(?:use\\s+v6\\b|\\bmodule\\b|\\b(?:my\\s+)?class\\b)/m',
     ),
   ),
   '.pm' => 
   array (
     'Perl' => 
     array (
+      'positive' => '/\\buse\\s+(?:strict\\b|v?5\\.)/m',
     ),
     'Perl 6' => 
     array (
+      'positive' => '/^\\s*(?:use\\s+v6\\b|\\bmodule\\b|\\b(?:my\\s+)?class\\b)/m',
     ),
     'X PixMap' => 
     array (
@@ -939,6 +948,7 @@ return array (
   array (
     'INI' => 
     array (
+      'positive' => '/^[^#!;][^=]*=/m',
     ),
     'Java Properties' => 
     array (
@@ -946,6 +956,7 @@ return array (
       array (
         0 => 
         array (
+          'positive' => '/^[^#!;][^=]*=/m',
         ),
         1 => 
         array (
@@ -1064,9 +1075,11 @@ return array (
   array (
     'Perl' => 
     array (
+      'positive' => '/\\buse\\s+(?:strict\\b|v?5\\.)/m',
     ),
     'Perl 6' => 
     array (
+      'positive' => '/^\\s*(?:use\\s+v6\\b|\\bmodule\\b|\\b(?:my\\s+)?class\\b)/m',
     ),
     'Turing' => 
     array (

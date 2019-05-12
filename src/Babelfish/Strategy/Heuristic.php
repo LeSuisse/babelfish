@@ -46,7 +46,7 @@ final class Heuristic implements Strategy
         $data      = $this->getDataToAnalyze($file);
         foreach ($heuristics as $language_name => $rules) {
             foreach ($language_candidates as $language_candidate) {
-                if ($language_name !== $language_candidate->getName() || ! $this->validateRules($data, $rules)) {
+                if (strtolower($language_name) !== strtolower($language_candidate->getName()) || ! $this->validateRules($data, $rules)) {
                     continue;
                 }
 

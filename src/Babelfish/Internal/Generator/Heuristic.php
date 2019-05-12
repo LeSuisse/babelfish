@@ -130,16 +130,18 @@ final class Heuristic implements Generator
      */
     private function getPositivePattern(array $rule, array $existing_named_patterns) : ?string
     {
-        $named_pattern = '';
+        if (isset($rule['pattern'])) {
+            return $this->addRegexDelimiterToPattern(
+                $this->getPattern($rule['pattern'])
+            );
+        }
         if (isset($rule['named_pattern'])) {
             if (! isset($existing_named_patterns[$rule['named_pattern']])) {
                 throw new HeuristicNamedPatternNotFound($rule['named_pattern']);
             }
-            $named_pattern = $this->getPattern($existing_named_patterns[$rule['named_pattern']]);
-        }
-        if (isset($rule['pattern'])) {
+
             return $this->addRegexDelimiterToPattern(
-                $this->getPattern([$this->getPattern($rule['pattern']), $named_pattern])
+                $this->getPattern($existing_named_patterns[$rule['named_pattern']])
             );
         }
 
