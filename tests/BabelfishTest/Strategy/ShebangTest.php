@@ -96,6 +96,7 @@ class ShebangTest extends TestCase
             [['Perl', 'Pod'], '#! perl'],
             [['Ruby'], "#!/bin/sh\n\n\nexec ruby $0 $@"],
             [['Shell'], '#! /usr/bin/env A=003 B=149 C=150 D=xzd E=base64 F=tar G=gz H=head I=tail sh'],
+            [['Python'], '#!/usr/bin/env foo=bar bar=foo python -cos=__import__("os");'],
         ];
     }
 }
