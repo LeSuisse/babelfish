@@ -58,8 +58,7 @@ class LanguageTest extends TestCase
     }
 
     /**
-     * @return array<array{string, string}>
-     *
+     * @psalm-return array<array{string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function aliasesProvider() : array
@@ -132,8 +131,7 @@ class LanguageTest extends TestCase
     }
 
     /**
-     * @return array<array{?string, string}>
-     *
+     * @psalm-return array<array{?string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function filenamesProvider() : array
@@ -155,8 +153,7 @@ class LanguageTest extends TestCase
     }
 
     /**
-     * @return array<array{string[], string}>
-     *
+     * @psalm-return array<array{string[], string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function interpretersProvider() : array
@@ -177,8 +174,7 @@ class LanguageTest extends TestCase
     }
 
     /**
-     * @return array<array{string[], string}>
-     *
+     * @psalm-return array<array{string[], string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function extensionsProvider() : array

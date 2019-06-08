@@ -59,8 +59,7 @@ class ModelineTest extends TestCase
     }
 
     /**
-     * @return array<array{string, string}>
-     *
+     * @psalm-return array<array{string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function modelineTestCaseProvider() : array

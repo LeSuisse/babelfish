@@ -32,14 +32,12 @@ final class Heuristic implements Generator
     }
 
     /**
-     * @return mixed[]
-     *
      * @psalm-return array<mixed, array<mixed, array{positive?:string, negative?:string, and?:array<array{positive?: string, negative?: string}>}>>
      */
-    public function generate(string $linguist_repo_path) : array
+    public function generate(string $linguist_repo_path) : array // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
     {
         /**
-         * @param array{
+         * @psalm-var array{
          *      named_patterns: array<string, string|string[]>,
          *      disambiguations: array{rules: string[], extensions: string[]}
          * } $heuristics
