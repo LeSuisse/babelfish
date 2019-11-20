@@ -11,7 +11,6 @@ git:
   submodules: false
 
 php:
-  - 7.2
   - 7.3
   - 7.4snapshot
 
@@ -35,7 +34,7 @@ after_success:
 jobs:
   include:
     - stage: Code quality
-      php: 7.2
+      php: 7.3
       script:
         - ./vendor/bin/phpcs
         - ./vendor/bin/psalm --shepherd
