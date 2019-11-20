@@ -58,7 +58,7 @@ class LanguageTest extends TestCase
     }
 
     /**
-     * @psalm-return array<array{string, string}>
+     * @psalm-return array<array{?string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
      */
     public function aliasesProvider() : array
