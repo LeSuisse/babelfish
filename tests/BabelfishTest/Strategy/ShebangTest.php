@@ -80,6 +80,11 @@ class ShebangTest extends TestCase
             [[], '#!'],
             [[], '#! '],
             [[], '#!/usr/bin/env'],
+            [[], '#!/usr/bin/env osascript -l JavaScript'],
+            [[], '#!/usr/bin/env osascript -l AppleScript'],
+            [[], '#!/usr/bin/env osascript -l foobar'],
+            [[], '#!/usr/bin/osascript -l JavaScript'],
+            [[], '#!/usr/bin/osascript -l foobar'],
             [['Ruby'], "#!/usr/sbin/ruby\n# bar"],
             [['Ruby'], "#!/usr/bin/ruby\n# foo"],
             [['Ruby'], '#!/usr/sbin/ruby'],
@@ -96,6 +101,8 @@ class ShebangTest extends TestCase
             [['Ruby'], "#!/bin/sh\n\n\nexec ruby $0 $@"],
             [['Shell'], '#! /usr/bin/env A=003 B=149 C=150 D=xzd E=base64 F=tar G=gz H=head I=tail sh'],
             [['Python'], '#!/usr/bin/env foo=bar bar=foo python -cos=__import__("os");'],
+            [['AppleScript'], '#!/usr/bin/env osascript'],
+            [['AppleScript'], '#!/usr/bin/osascript'],
         ];
     }
 }

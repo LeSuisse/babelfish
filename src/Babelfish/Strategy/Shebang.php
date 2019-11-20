@@ -69,6 +69,10 @@ final class Shebang implements Strategy
             $script = $exec_matches[1];
         }
 
+        if ($script === 'osascript' && preg_match('/osascript\s+-l/', $first_line) === 1) {
+            return [];
+        }
+
         return $this->filter->filter($language_candidates, ...Language::findLanguagesByInterpreter($script));
     }
 
