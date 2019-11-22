@@ -13,7 +13,7 @@
         "php": "^7.3"
     },
     "require-dev": {
-        "symfony/yaml": "^4.1",
+        "symfony/yaml": "^4.1 || ^5.0",
         "doctrine/coding-standard": "^6.0",
         "vimeo/psalm": "^3.0",
         "phpunit/phpunit": "^8.0",
