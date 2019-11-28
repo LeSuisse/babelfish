@@ -1,0 +1,47 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        php-versions: ['7.3', '7.4']
+    name: Tests on PHP ${{ matrix.php-versions }}
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+      - uses: shivammathur/setup-php@1.5.5
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extension-csv: mbstring
+          coverage: pcov
+      - name: Install dependencies
+        run: composer install --no-interaction
+      - name: Run tests
+        run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.3
+        with:
+          file: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+  code_quality:
+    runs-on: ubuntu-18.04
+    name: Code quality
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: false
+      - uses: shivammathur/setup-php@1.5.5
+        with:
+          php-version: '7.4'
+          extension-csv: mbstring
+          coverage: none
+      - name: Install dependencies
+        run: composer install --no-interaction
+      - name: PHPCS
+        run: ./vendor/bin/phpcs
+      - name: Psalm
+        run: ./vendor/bin/psalm --shepherd

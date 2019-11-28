@@ -2,6 +2,7 @@ src/Babelfish/Data/* linguist-generated=true
 /tests export-ignore
 /scripts export-ignore
 /src/Babelfish/Internal export-ignore
+/.github export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .gitmodules export-ignore
