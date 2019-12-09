@@ -13,6 +13,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use function array_key_exists;
+use function assert;
 use function basename;
 use function dirname;
 use function file_get_contents;
@@ -320,8 +321,8 @@ class BabelfishTest extends TestCase
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator  = new RecursiveIteratorIterator($directory);
-        /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
+            assert($sample_file instanceof SplFileInfo);
             if (array_key_exists($sample_file->getFilename(), self::INCORRECT_CLASSIFICATION)) {
                 continue;
             }
@@ -330,6 +331,7 @@ class BabelfishTest extends TestCase
             if ($expected_language_name === 'filenames') {
                 $expected_language_name = basename(dirname($sample_file->getPath()));
             }
+
             $source_file = new ContentFile($sample_file->getFilename(), file_get_contents($sample_file->getPathname()));
             $language    = $babelfish->getLanguage($source_file);
 

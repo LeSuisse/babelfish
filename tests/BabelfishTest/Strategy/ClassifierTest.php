@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+use function assert;
 use function basename;
 use function count;
 use function dirname;
@@ -77,8 +78,8 @@ class ClassifierTest extends TestCase
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator  = new RecursiveIteratorIterator($directory);
-        /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
+            assert($sample_file instanceof SplFileInfo);
             $filename = $sample_file->getFilename();
 
             if (isset($failure_whitelist[$filename])) {

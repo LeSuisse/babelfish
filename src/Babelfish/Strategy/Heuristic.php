@@ -6,12 +6,12 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
-use const PATHINFO_EXTENSION;
 use function pathinfo;
 use function preg_match;
 use function strlen;
 use function strtolower;
 use function substr;
+use const PATHINFO_EXTENSION;
 
 final class Heuristic implements Strategy
 {
@@ -32,11 +32,13 @@ final class Heuristic implements Strategy
         if ($file_extension === '') {
             return [];
         }
+
         $file_extension = '.' . strtolower($file_extension);
 
         if (! isset($heuristics_indexed_by_extension[$file_extension])) {
             return [];
         }
+
         /**
          * @psalm-var array<string, array{positive: string, negative: string, and: array<string, array{positive: string, negative: string}>}> $heuristics
          */

@@ -37,19 +37,21 @@ class HeuristicTest extends TestCase
 
             return;
         }
+
         $language_candidates = [];
         foreach ($language_candidate_names as $language_candidate_name) {
             $language_candidate = Language::findByAlias($language_candidate_name);
             $this->assertNotNull($language_candidate);
             $language_candidates[] = $language_candidate;
         }
+
         $heuristic = new Heuristic();
         $this->assertSame($language_candidates, $heuristic->getLanguages($file, ...$language_candidates), $file->getName());
     }
 
     /**
      * @psalm-return array<array{SourceFile, string[]}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function heuristicDataProvider() : array
     {
@@ -306,6 +308,7 @@ class HeuristicTest extends TestCase
                     if (isset($this->getAmbiguousFile()[$extension][$language_used_for_sample][$sample->getName()])) {
                         continue;
                     }
+
                     $provided_data[] = [$sample, $language_candidates];
                 }
             }
@@ -351,7 +354,7 @@ class HeuristicTest extends TestCase
 
     /**
      * @psalm-return array<array{SourceFile, string}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function ambiguousFileDataProvider() : array
     {
@@ -370,7 +373,7 @@ class HeuristicTest extends TestCase
 
     /**
      * @psalm-return array<string, array<string, array<string, true>>>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     private function getAmbiguousFile() : array
     {

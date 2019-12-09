@@ -33,6 +33,7 @@ final class Heuristic implements Generator
 
     /**
      * @psalm-return array<mixed, array<mixed, array{positive?:string, negative?:string, and?:array<array{positive?: string, negative?: string}>}>>
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function generate(string $linguist_repo_path) : array // phpcs:ignore SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
     {
@@ -49,7 +50,6 @@ final class Heuristic implements Generator
         /** @psalm-var array<string, string> $existing_named_patterns */
         $existing_named_patterns = [];
         /**
-         * @var string $name
          * @var string|string[] $pattern
          */
         foreach ($heuristics['named_patterns'] as $name => $pattern) {
@@ -81,11 +81,11 @@ final class Heuristic implements Generator
                 }
             }
 
-            /** @var string $extension */
             foreach ($disambiguation['extensions'] as $extension) {
                 if (isset($disambiguations_by_extension[$extension])) {
                     throw new HeuristicMultipleExtension($extension);
                 }
+
                 $disambiguations_by_extension[$extension] = $parsed_rules_by_language;
             }
         }
@@ -110,10 +110,12 @@ final class Heuristic implements Generator
         if ($positive_pattern !== null) {
             $parsed_patterns['positive'] = $positive_pattern;
         }
+
         if (isset($rule['negative_pattern'])) {
             if ($positive_pattern !== null) {
                 throw new HeuristicRuleMultiplePatterns($rule);
             }
+
             $parsed_patterns['negative'] = $this->addRegexDelimiterToPattern($this->getPattern($rule['negative_pattern']));
         }
 
@@ -133,6 +135,7 @@ final class Heuristic implements Generator
                 $this->getPattern($rule['pattern'])
             );
         }
+
         if (isset($rule['named_pattern'])) {
             if (! isset($existing_named_patterns[$rule['named_pattern']])) {
                 throw new HeuristicNamedPatternNotFound($rule['named_pattern']);
@@ -156,8 +159,8 @@ final class Heuristic implements Generator
         } else {
             $pattern = $pattern_rule;
         }
+
         if (isset(self::HARDCODED_PATTERN_REPLACEMENT[$pattern])) {
-            /** @var string $pattern */
             $pattern = self::HARDCODED_PATTERN_REPLACEMENT[$pattern];
         }
 

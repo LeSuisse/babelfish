@@ -10,6 +10,7 @@ use Babelfish\Strategy\Tokenizer\Tokenizer;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+use function assert;
 use function basename;
 use function dirname;
 
@@ -29,12 +30,13 @@ final class ClassifierSample implements Generator
             RecursiveDirectoryIterator::SKIP_DOTS
         );
         $iterator  = new RecursiveIteratorIterator($directory);
-        /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
+            assert($sample_file instanceof SplFileInfo);
             $language_name = basename($sample_file->getPath());
             if ($language_name === 'filenames') {
                 $language_name = basename(dirname($sample_file->getPath()));
             }
+
             $samples[] = new TrainSampleFromFile($language_name, $sample_file->getPathname());
         }
 

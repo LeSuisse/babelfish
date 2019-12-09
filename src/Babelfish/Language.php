@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Babelfish;
 
+use function assert;
+use function is_string;
 use function str_replace;
 use function strtolower;
 
@@ -29,8 +31,9 @@ class Language
             /** @psalm-var array<string, string> $languages_indexed_by_alias */
             $languages_indexed_by_alias = include __DIR__ . '/Data/Aliases.php';
         }
-        /** @var string|null $language_name */
+
         $language_name = $languages_indexed_by_alias[str_replace(' ', '-', strtolower($alias))] ?? null;
+        assert(is_string($language_name) || $language_name === null);
         if ($language_name === null) {
             return null;
         }
@@ -45,8 +48,9 @@ class Language
             /** @psalm-var array<string, string> $languages_indexed_by_filename */
             $languages_indexed_by_filename = include __DIR__ . '/Data/Filenames.php';
         }
-        /** @var string|null $language_name */
+
         $language_name = $languages_indexed_by_filename[$filename] ?? null;
+        assert(is_string($language_name) || $language_name === null);
         if ($language_name === null) {
             return null;
         }
@@ -64,6 +68,7 @@ class Language
             /** @psalm-var array<string, string[]> $languages_indexed_by_interpreter */
             $languages_indexed_by_interpreter = include __DIR__ . '/Data/Interpreters.php';
         }
+
         /** @var string[] $languages_name */
         $languages_name = $languages_indexed_by_interpreter[$interpreter] ?? [];
         $languages      = [];
@@ -84,6 +89,7 @@ class Language
             /** @psalm-var array<string, string[]> $languages_indexed_by_extension */
             $languages_indexed_by_extension = include __DIR__ . '/Data/Extensions.php';
         }
+
         /** @var string[] $languages_name */
         $languages_name = $languages_indexed_by_extension[strtolower($extension)] ?? [];
         $languages      = [];

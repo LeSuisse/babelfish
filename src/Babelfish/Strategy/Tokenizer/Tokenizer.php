@@ -59,6 +59,7 @@ final class Tokenizer
                 } else {
                     $match = substr($match, 1);
                 }
+
                 $tokens->append(self::SHEBANG_TOKEN . $match);
 
                 return ' ';
@@ -75,6 +76,7 @@ final class Tokenizer
                 } else {
                     $match = substr($match, 1);
                 }
+
                 if ($match !== 'env') {
                     $tokens->append(self::SHEBANG_TOKEN . $match);
                 }
@@ -91,6 +93,7 @@ final class Tokenizer
                 if (preg_match(self::REGEX_SGML_COMMENT, (string) $matches[0]) === 1) {
                     return ' ';
                 }
+
                 $tokens->append((string) $matches[1] . '>');
 
                 // Attributes
@@ -100,6 +103,7 @@ final class Tokenizer
                         if ($matches[1] !== '') {
                             $tokens->append((string) $matches[1]);
                         }
+
                         if (isset($matches[2]) &&
                             preg_match(self::REGEX_SGML_LONE_ATTRIBUTE, (string) $matches[2], $lone_attribute) === 1) {
                             $tokens->append($lone_attribute[0]);
