@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   tests:
@@ -10,20 +14,24 @@ jobs:
         php-versions: ['7.3', '7.4']
     name: Tests on PHP ${{ matrix.php-versions }}
     steps:
-      - uses: actions/checkout@v1
-        with:
-          submodules: true
-      - uses: shivammathur/setup-php@1.5.5
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --depth=1
+      - uses: shivammathur/setup-php@1.8.2
         with:
           php-version: ${{ matrix.php-versions }}
-          extension-csv: mbstring
+          extension: mbstring
           coverage: pcov
       - name: Install dependencies
         run: composer install --no-interaction
       - name: Run tests
         run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1.0.3
+        uses: codecov/codecov-action@v1.0.5
         with:
           file: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -31,13 +39,11 @@ jobs:
     runs-on: ubuntu-18.04
     name: Code quality
     steps:
-      - uses: actions/checkout@v1
-        with:
-          submodules: false
-      - uses: shivammathur/setup-php@1.5.5
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@1.8.2
         with:
           php-version: '7.4'
-          extension-csv: mbstring
+          extension: mbstring
           coverage: none
       - name: Install dependencies
         run: composer install --no-interaction
