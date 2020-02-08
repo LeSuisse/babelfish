@@ -38,7 +38,7 @@ class XMLTest extends TestCase
 
     /**
      * @psalm-return array<array{bool, SourceFile}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function XMLFileProviders() : array
     {

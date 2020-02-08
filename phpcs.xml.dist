@@ -13,5 +13,8 @@
 
     <exclude-pattern>*/src/Babelfish/Data/*</exclude-pattern>
 
-    <rule ref="Doctrine"/>
+        <rule ref="Doctrine">
+            <exclude name="Squiz.NamingConventions.ValidVariableName" />
+            <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
+        </rule>
 </ruleset>

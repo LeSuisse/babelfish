@@ -42,6 +42,7 @@ final class Alias implements Generator
             if (! isset($attributes['aliases'])) {
                 continue;
             }
+
             foreach ($attributes['aliases'] as $alias) {
                 $exported_aliases[$this->formatKey($alias)] = $name;
             }

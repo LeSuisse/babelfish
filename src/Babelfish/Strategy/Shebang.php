@@ -35,10 +35,12 @@ final class Shebang implements Strategy
         if (empty($lines)) {
             return [];
         }
+
         $first_line = $lines[0];
         if (strpos($first_line, '#!') !== 0) {
             return [];
         }
+
         if (preg_match('/^#!\s*(\S+)(.*)/', $first_line, $shebang_matches) !== 1) {
             return [];
         }

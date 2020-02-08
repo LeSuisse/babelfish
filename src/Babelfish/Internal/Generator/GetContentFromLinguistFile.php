@@ -15,6 +15,7 @@ trait GetContentFromLinguistFile
         if (! file_exists($file_to_read)) {
             throw new FileDoesNotExist($file_to_read);
         }
+
         $file = new SplFileObject($file_to_read);
 
         return $file->fread($file->getSize());

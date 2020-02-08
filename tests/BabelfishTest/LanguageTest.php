@@ -39,6 +39,7 @@ class LanguageTest extends TestCase
         foreach ($languages as $language) {
             $names[] = $language->getName();
         }
+
         $this->assertEquals($expected_languages_name, $names);
     }
 
@@ -54,12 +55,13 @@ class LanguageTest extends TestCase
         foreach ($languages as $language) {
             $names[] = $language->getName();
         }
+
         $this->assertEquals($expected_languages_name, $names);
     }
 
     /**
      * @psalm-return array<array{?string, string}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function aliasesProvider() : array
     {
@@ -132,7 +134,7 @@ class LanguageTest extends TestCase
 
     /**
      * @psalm-return array<array{?string, string}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function filenamesProvider() : array
     {
@@ -154,7 +156,7 @@ class LanguageTest extends TestCase
 
     /**
      * @psalm-return array<array{string[], string}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function interpretersProvider() : array
     {
@@ -175,7 +177,7 @@ class LanguageTest extends TestCase
 
     /**
      * @psalm-return array<array{string[], string}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function extensionsProvider() : array
     {

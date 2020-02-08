@@ -38,6 +38,7 @@ final class TrainableDatabase implements Database
         if (! isset($this->db['languages'][$train_sample->getLanguageName()])) {
             $this->db['languages'][$train_sample->getLanguageName()] = 0;
         }
+
         $this->db['languages'][$train_sample->getLanguageName()] += 1;
         $this->db['languages_total']                             += 1;
 
@@ -48,14 +49,17 @@ final class TrainableDatabase implements Database
             if (! isset($this->db['tokens'][$train_sample->getLanguageName()])) {
                 $this->db['tokens'][$train_sample->getLanguageName()] = [];
             }
+
             if (! isset($this->db['tokens'][$train_sample->getLanguageName()][$token])) {
                 $this->db['tokens'][$train_sample->getLanguageName()][$token] = 0;
             }
+
             $this->db['tokens'][$train_sample->getLanguageName()][$token] += 1;
 
             if (! isset($this->db['language_tokens'][$train_sample->getLanguageName()])) {
                 $this->db['language_tokens'][$train_sample->getLanguageName()] = 0;
             }
+
             $this->db['language_tokens'][$train_sample->getLanguageName()] += 1;
         }
     }

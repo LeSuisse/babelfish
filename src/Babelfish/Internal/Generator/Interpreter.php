@@ -39,6 +39,7 @@ final class Interpreter implements Generator
             if (! isset($attributes['interpreters'])) {
                 continue;
             }
+
             foreach ($attributes['interpreters'] as $interpreter) {
                 $exported_interpreter[$interpreter][] = $name;
             }

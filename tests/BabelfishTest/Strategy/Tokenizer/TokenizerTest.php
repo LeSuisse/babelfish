@@ -31,7 +31,7 @@ class TokenizerTest extends TestCase
 
     /**
      * @psalm-return array<array{string, string[]}>
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingTraversableReturnTypeHintSpecification
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
     public function tokensDataProvider() : array
     {
