@@ -29,6 +29,8 @@ class Language
             /** @psalm-var array<string, string> $languages_indexed_by_alias */
             $languages_indexed_by_alias = include __DIR__ . '/Data/Aliases.php';
         }
+
+        // phpcs:ignore SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion
         /** @var string|null $language_name */
         $language_name = $languages_indexed_by_alias[str_replace(' ', '-', strtolower($alias))] ?? null;
         if ($language_name === null) {
@@ -45,6 +47,8 @@ class Language
             /** @psalm-var array<string, string> $languages_indexed_by_filename */
             $languages_indexed_by_filename = include __DIR__ . '/Data/Filenames.php';
         }
+
+        // phpcs:ignore SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion
         /** @var string|null $language_name */
         $language_name = $languages_indexed_by_filename[$filename] ?? null;
         if ($language_name === null) {
@@ -64,6 +68,7 @@ class Language
             /** @psalm-var array<string, string[]> $languages_indexed_by_interpreter */
             $languages_indexed_by_interpreter = include __DIR__ . '/Data/Interpreters.php';
         }
+
         /** @var string[] $languages_name */
         $languages_name = $languages_indexed_by_interpreter[$interpreter] ?? [];
         $languages      = [];
@@ -84,6 +89,7 @@ class Language
             /** @psalm-var array<string, string[]> $languages_indexed_by_extension */
             $languages_indexed_by_extension = include __DIR__ . '/Data/Extensions.php';
         }
+
         /** @var string[] $languages_name */
         $languages_name = $languages_indexed_by_extension[strtolower($extension)] ?? [];
         $languages      = [];

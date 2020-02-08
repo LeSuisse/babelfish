@@ -320,6 +320,7 @@ class BabelfishTest extends TestCase
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator  = new RecursiveIteratorIterator($directory);
+        // phpcs:ignore SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion
         /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
             if (array_key_exists($sample_file->getFilename(), self::INCORRECT_CLASSIFICATION)) {
@@ -330,6 +331,7 @@ class BabelfishTest extends TestCase
             if ($expected_language_name === 'filenames') {
                 $expected_language_name = basename(dirname($sample_file->getPath()));
             }
+
             $source_file = new ContentFile($sample_file->getFilename(), file_get_contents($sample_file->getPathname()));
             $language    = $babelfish->getLanguage($source_file);
 

@@ -37,6 +37,7 @@ final class Extension implements Generator
             if (! isset($attributes['extensions'])) {
                 continue;
             }
+
             foreach ($attributes['extensions'] as $filename) {
                 $exported_extension[$filename][] = $name;
             }

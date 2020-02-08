@@ -7,8 +7,8 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
-use const PATHINFO_EXTENSION;
 use function pathinfo;
+use const PATHINFO_EXTENSION;
 
 final class Extension implements Strategy
 {

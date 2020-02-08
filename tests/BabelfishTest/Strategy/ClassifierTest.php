@@ -77,6 +77,7 @@ class ClassifierTest extends TestCase
 
         $directory = new RecursiveDirectoryIterator(__DIR__ . '/../../../linguist/samples/', RecursiveDirectoryIterator::SKIP_DOTS);
         $iterator  = new RecursiveIteratorIterator($directory);
+        // phpcs:ignore SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion
         /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
             $filename = $sample_file->getFilename();

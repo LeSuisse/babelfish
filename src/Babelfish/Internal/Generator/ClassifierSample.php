@@ -29,12 +29,14 @@ final class ClassifierSample implements Generator
             RecursiveDirectoryIterator::SKIP_DOTS
         );
         $iterator  = new RecursiveIteratorIterator($directory);
+        // phpcs:ignore SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion
         /** @var SplFileInfo $sample_file */
         foreach ($iterator as $sample_file) {
             $language_name = basename($sample_file->getPath());
             if ($language_name === 'filenames') {
                 $language_name = basename(dirname($sample_file->getPath()));
             }
+
             $samples[] = new TrainSampleFromFile($language_name, $sample_file->getPathname());
         }
 

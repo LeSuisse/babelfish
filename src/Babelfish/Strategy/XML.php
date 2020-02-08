@@ -7,6 +7,7 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use function array_slice;
+use function assert;
 use function implode;
 use function strpos;
 
@@ -28,10 +29,9 @@ final class XML implements Strategy
         if (strpos($header, '<?xml version=') !== false) {
             /**
              * @see \BabelfishTest\Strategy\XMLTest::testXMLLanguageIsPresent
-             *
-             * @var Language $xml_language
              */
             $xml_language = Language::findByAlias('XML');
+            assert($xml_language instanceof Language);
 
             return [$xml_language];
         }

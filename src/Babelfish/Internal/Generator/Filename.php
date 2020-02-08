@@ -37,6 +37,7 @@ final class Filename implements Generator
             if (! isset($attributes['filenames'])) {
                 continue;
             }
+
             foreach ($attributes['filenames'] as $filename) {
                 $exported_filename[$filename] = $name;
             }
