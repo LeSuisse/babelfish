@@ -12,7 +12,8 @@ jobs:
     strategy:
       matrix:
         php-versions: ['7.3', '7.4']
-    name: Tests on PHP ${{ matrix.php-versions }}
+        dependencies: ['', '--prefer-lowest --prefer-stable']
+    name: Tests on PHP ${{ matrix.php-versions }} ${{ matrix.dependencies }}
     steps:
       - uses: actions/checkout@v2
       - name: Checkout submodules
@@ -26,8 +27,10 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           extension: mbstring
           coverage: pcov
+      - name: Remove Composer lockfile
+        run: rm composer.lock
       - name: Install dependencies
-        run: composer install --no-interaction
+        run: composer update --no-interaction --prefer-dist ${{ matrix.dependencies }}
       - name: Run tests
         run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: Upload coverage to Codecov
