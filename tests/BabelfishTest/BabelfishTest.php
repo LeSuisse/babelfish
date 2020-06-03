@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+
 use function array_key_exists;
 use function basename;
 use function dirname;
@@ -314,7 +315,7 @@ class BabelfishTest extends TestCase
         'apache.vhost' => null,
     ];
 
-    public function testGetLanguage() : void
+    public function testGetLanguage(): void
     {
         $babelfish = Babelfish::getWithDefaultStrategies();
 
@@ -340,7 +341,7 @@ class BabelfishTest extends TestCase
         }
     }
 
-    public function testLanguagesCanNotBeFound() : void
+    public function testLanguagesCanNotBeFound(): void
     {
         $babelfish = new Babelfish();
 
@@ -349,7 +350,7 @@ class BabelfishTest extends TestCase
         $this->assertNull($babelfish->getLanguage($source_file));
     }
 
-    public function testOnlyReturnsTheMostProbableLanguage() : void
+    public function testOnlyReturnsTheMostProbableLanguage(): void
     {
         $strategy   = $this->createMock(Strategy::class);
         $language_0 = $this->createMock(Language::class);

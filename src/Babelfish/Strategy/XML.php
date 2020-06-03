@@ -6,6 +6,7 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
+
 use function array_slice;
 use function assert;
 use function implode;
@@ -18,7 +19,7 @@ final class XML implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         if (! empty($language_candidates)) {
             return $language_candidates;

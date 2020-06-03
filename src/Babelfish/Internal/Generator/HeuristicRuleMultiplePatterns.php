@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Babelfish\Internal\Generator;
 
 use RuntimeException;
+
 use function print_r;
 
 final class HeuristicRuleMultiplePatterns extends RuntimeException

@@ -6,10 +6,10 @@ namespace Babelfish\File;
 
 interface SourceFile
 {
-    public function getName() : string;
+    public function getName(): string;
 
     /**
      * @return string[]
      */
-    public function getLines() : array;
+    public function getLines(): array;
 }

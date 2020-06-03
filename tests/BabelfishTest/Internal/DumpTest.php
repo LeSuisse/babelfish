@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class DumpTest extends TestCase
 {
-    public function testDumpHoldValues() : void
+    public function testDumpHoldValues(): void
     {
         $path      = 'mypath';
         $generator = $this->createMock(Generator::class);

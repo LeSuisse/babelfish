@@ -6,11 +6,13 @@ namespace Babelfish\Strategy;
 
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
+
 use function pathinfo;
 use function preg_match;
 use function strlen;
 use function strtolower;
 use function substr;
+
 use const PATHINFO_EXTENSION;
 
 final class Heuristic implements Strategy
@@ -20,7 +22,7 @@ final class Heuristic implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         static $heuristics_indexed_by_extension = null;
         if ($heuristics_indexed_by_extension === null) {
@@ -59,7 +61,7 @@ final class Heuristic implements Strategy
         return $languages;
     }
 
-    private function getDataToAnalyze(SourceFile $file) : string
+    private function getDataToAnalyze(SourceFile $file): string
     {
         $data = '';
         foreach ($file->getLines() as $line) {
@@ -77,7 +79,7 @@ final class Heuristic implements Strategy
      *
      * @psalm-param array{positive: string, negative: string, and: array<string, array{positive: string, negative: string}>} $rules
      */
-    private function validateRules(string $data, array $rules) : bool
+    private function validateRules(string $data, array $rules): bool
     {
         if (! isset($rules['and'])) {
             return $this->validateSimpleRule($data, $rules);
@@ -98,7 +100,7 @@ final class Heuristic implements Strategy
      *
      * @psalm-param array{positive: string, negative: string} $rule
      */
-    private function validateSimpleRule(string $data, array $rule) : bool
+    private function validateSimpleRule(string $data, array $rule): bool
     {
         if (isset($rule['positive'])) {
             return preg_match($rule['positive'], $data) === 1;

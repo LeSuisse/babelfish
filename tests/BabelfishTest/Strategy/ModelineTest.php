@@ -16,14 +16,14 @@ class ModelineTest extends TestCase
     /**
      * @dataProvider modelineTestCaseProvider
      */
-    public function testSourceFileWithModeline(string $expected_language_name, string $linguist_fixture_path) : void
+    public function testSourceFileWithModeline(string $expected_language_name, string $linguist_fixture_path): void
     {
         $source_file = LinguistData::getFixtureSourceFile($linguist_fixture_path);
 
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) : array {
+            static function (array $language_candidates, Language ...$found_languages): array {
                 return $found_languages;
             }
         );
@@ -35,7 +35,7 @@ class ModelineTest extends TestCase
         $this->assertSame($expected_language_name, $languages[0]->getName());
     }
 
-    public function testSourceFileWithoutModelineInTheHeaderOrFooter() : void
+    public function testSourceFileWithoutModelineInTheHeaderOrFooter(): void
     {
         $filter    = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $modeline  = new Modeline($filter);
@@ -44,7 +44,7 @@ class ModelineTest extends TestCase
         $this->assertEmpty($languages);
     }
 
-    public function testNoLanguageIsReturnedWhenAliasGivenInTheModelineIsNotFound() : void
+    public function testNoLanguageIsReturnedWhenAliasGivenInTheModelineIsNotFound(): void
     {
         $filter   = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         $modeline = new Modeline($filter);
@@ -62,7 +62,7 @@ class ModelineTest extends TestCase
      * @psalm-return array<array{string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function modelineTestCaseProvider() : array
+    public function modelineTestCaseProvider(): array
     {
         return [
             ['Ruby', 'Data/Modelines/ruby'],

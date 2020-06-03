@@ -9,5 +9,5 @@ interface Generator
     /**
      * @return mixed[]
      */
-    public function generate(string $linguist_repository_path) : array;
+    public function generate(string $linguist_repository_path): array;
 }

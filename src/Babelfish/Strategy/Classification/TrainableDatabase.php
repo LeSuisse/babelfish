@@ -33,7 +33,7 @@ final class TrainableDatabase implements Database
         }
     }
 
-    private function train(Tokenizer $tokenizer, TrainSample $train_sample) : void
+    private function train(Tokenizer $tokenizer, TrainSample $train_sample): void
     {
         if (! isset($this->db['languages'][$train_sample->getLanguageName()])) {
             $this->db['languages'][$train_sample->getLanguageName()] = 0;
@@ -64,27 +64,27 @@ final class TrainableDatabase implements Database
         }
     }
 
-    public function getTokens(string $language_name, string $token) : ?int
+    public function getTokens(string $language_name, string $token): ?int
     {
         return $this->db['tokens'][$language_name][$token] ?? null;
     }
 
-    public function getLanguageTokens(string $language_name) : int
+    public function getLanguageTokens(string $language_name): int
     {
         return $this->db['language_tokens'][$language_name];
     }
 
-    public function getTotalTokens() : int
+    public function getTotalTokens(): int
     {
         return $this->db['tokens_total'];
     }
 
-    public function getLanguage(string $language_name) : int
+    public function getLanguage(string $language_name): int
     {
         return $this->db['languages'][$language_name];
     }
 
-    public function getTotalLanguages() : int
+    public function getTotalLanguages(): int
     {
         return $this->db['languages_total'];
     }
@@ -92,7 +92,7 @@ final class TrainableDatabase implements Database
     /**
      * @return int[]|mixed[]
      */
-    public function getRawDatabase() : array
+    public function getRawDatabase(): array
     {
         return $this->db;
     }

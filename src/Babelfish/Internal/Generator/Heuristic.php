@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Babelfish\Internal\Generator;
 
 use Babelfish\Internal\Parser\Parser;
+
 use function array_filter;
 use function implode;
 use function is_array;
@@ -34,7 +35,7 @@ final class Heuristic implements Generator
     /**
      * @psalm-return array<mixed, array<mixed, array{positive?:string, negative?:string, and?:array<array{positive?: string, negative?: string}>}>>
      */
-    public function generate(string $linguist_repo_path) : array // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
+    public function generate(string $linguist_repo_path): array // phpcs:ignore SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
     {
         /**
          * @psalm-var array{
@@ -101,7 +102,7 @@ final class Heuristic implements Generator
      * @psalm-param array{named_pattern?: string, pattern?: string|string[], negative_pattern?: string|string[]} $rule
      * @psalm-return array{positive?: string, negative?: string}
      */
-    private function getParsedPatterns(array $rule, array $existing_named_patterns) : array
+    private function getParsedPatterns(array $rule, array $existing_named_patterns): array
     {
         $parsed_patterns = [];
 
@@ -127,7 +128,7 @@ final class Heuristic implements Generator
      *
      * @psalm-param array{named_pattern?: string, pattern?: string|string[]} $rule
      */
-    private function getPositivePattern(array $rule, array $existing_named_patterns) : ?string
+    private function getPositivePattern(array $rule, array $existing_named_patterns): ?string
     {
         if (isset($rule['pattern'])) {
             return $this->addRegexDelimiterToPattern(
@@ -151,7 +152,7 @@ final class Heuristic implements Generator
     /**
      * @param string|string[] $pattern_rule
      */
-    private function getPattern($pattern_rule) : string
+    private function getPattern($pattern_rule): string
     {
         if (is_array($pattern_rule)) {
             $pattern = implode('|', array_filter($pattern_rule));
@@ -170,7 +171,7 @@ final class Heuristic implements Generator
         return $pattern;
     }
 
-    private function addRegexDelimiterToPattern(string $pattern) : string
+    private function addRegexDelimiterToPattern(string $pattern): string
     {
         return self::REGEX_DELIMITER . $pattern . self::REGEX_DELIMITER . 'm';
     }

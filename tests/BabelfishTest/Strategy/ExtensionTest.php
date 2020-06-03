@@ -15,7 +15,7 @@ class ExtensionTest extends TestCase
     /**
      * @dataProvider filenamesExtensionProvider
      */
-    public function testSourceFileExtension(?string $language_name, string $filename) : void
+    public function testSourceFileExtension(?string $language_name, string $filename): void
     {
         $source_file = $this->createMock(SourceFile::class);
         /** @psalm-suppress InternalMethod */
@@ -24,7 +24,7 @@ class ExtensionTest extends TestCase
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) : array {
+            static function (array $language_candidates, Language ...$found_languages): array {
                 return $found_languages;
             }
         );
@@ -44,7 +44,7 @@ class ExtensionTest extends TestCase
      * @psalm-return array<array{?string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function filenamesExtensionProvider() : array
+    public function filenamesExtensionProvider(): array
     {
         return [
             ['PHP', 'test.php3'],

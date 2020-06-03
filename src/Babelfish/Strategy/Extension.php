@@ -7,7 +7,9 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
+
 use function pathinfo;
+
 use const PATHINFO_EXTENSION;
 
 final class Extension implements Strategy
@@ -23,7 +25,7 @@ final class Extension implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         /** @psalm-var array{extension: string, filename: string} $path_information */
         $path_information = pathinfo($file->getName());

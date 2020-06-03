@@ -36,27 +36,27 @@ final class CachedDatabase implements Database
         return $db;
     }
 
-    public function getTokens(string $language_name, string $token) : ?int
+    public function getTokens(string $language_name, string $token): ?int
     {
         return $this->getDB()['tokens'][$language_name][$token] ?? null;
     }
 
-    public function getLanguageTokens(string $language_name) : int
+    public function getLanguageTokens(string $language_name): int
     {
         return $this->getDB()['language_tokens'][$language_name];
     }
 
-    public function getTotalTokens() : int
+    public function getTotalTokens(): int
     {
         return $this->getDB()['tokens_total'];
     }
 
-    public function getLanguage(string $language_name) : int
+    public function getLanguage(string $language_name): int
     {
         return $this->getDB()['languages'][$language_name];
     }
 
-    public function getTotalLanguages() : int
+    public function getTotalLanguages(): int
     {
         return $this->getDB()['languages_total'];
     }

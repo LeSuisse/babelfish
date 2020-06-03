@@ -7,6 +7,7 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
+
 use function array_merge;
 use function array_slice;
 use function count;
@@ -111,7 +112,7 @@ EOT;
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         $content = $this->getHeaderAndFooter($file);
 
@@ -136,7 +137,7 @@ EOT;
         return $this->filter->filter($language_candidates, $language);
     }
 
-    private function getHeaderAndFooter(SourceFile $file) : string
+    private function getHeaderAndFooter(SourceFile $file): string
     {
         $lines = $file->getLines();
 

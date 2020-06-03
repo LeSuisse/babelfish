@@ -19,12 +19,12 @@ final class TrainSampleFromFile implements TrainSample
         $this->file_path     = $file_path;
     }
 
-    public function getLanguageName() : string
+    public function getLanguageName(): string
     {
         return $this->language_name;
     }
 
-    public function getContent() : string
+    public function getContent(): string
     {
         return file_get_contents($this->file_path);
     }

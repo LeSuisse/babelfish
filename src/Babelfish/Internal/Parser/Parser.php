@@ -9,5 +9,5 @@ interface Parser
     /**
      * @return mixed[]
      */
-    public function getParsedContent(string $content) : array;
+    public function getParsedContent(string $content): array;
 }

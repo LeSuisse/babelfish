@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class XMLTest extends TestCase
 {
-    public function testXMLLanguageIsPresent() : void
+    public function testXMLLanguageIsPresent(): void
     {
         $language = Language::findByAlias('XML');
 
@@ -23,7 +23,7 @@ class XMLTest extends TestCase
     /**
      * @dataProvider XMLFileProviders
      */
-    public function testSourceFileXML(bool $is_xml, SourceFile $file) : void
+    public function testSourceFileXML(bool $is_xml, SourceFile $file): void
     {
         $strategy  = new XML();
         $languages = $strategy->getLanguages($file);
@@ -40,7 +40,7 @@ class XMLTest extends TestCase
      * @psalm-return array<array{bool, SourceFile}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function XMLFileProviders() : array
+    public function XMLFileProviders(): array
     {
         return [
             [false, LinguistData::getSampleSourceFile('XML/libsomething.dll.config')],
@@ -62,7 +62,7 @@ class XMLTest extends TestCase
         ];
     }
 
-    public function testDoNotTryToDetectXMLWhenLanguageCandidatesExist() : void
+    public function testDoNotTryToDetectXMLWhenLanguageCandidatesExist(): void
     {
         $language_candidates = [$this->createMock(Language::class), $this->createMock(Language::class)];
         $strategy            = new XML();

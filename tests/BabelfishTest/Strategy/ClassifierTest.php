@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+
 use function basename;
 use function count;
 use function dirname;
@@ -23,7 +24,7 @@ use function file_get_contents;
 
 class ClassifierTest extends TestCase
 {
-    public function testClassification() : void
+    public function testClassification(): void
     {
         $tokenizer = new Tokenizer();
         $db        = new TrainableDatabase(
@@ -54,13 +55,13 @@ class ClassifierTest extends TestCase
         $this->assertEquals('Ruby', $found_languages[0]->getName());
     }
 
-    public function testClassifyWithoutCandidates() : void
+    public function testClassifyWithoutCandidates(): void
     {
         $classifier = new Classifier(new Tokenizer(), new CachedDatabase());
         $this->assertEmpty($classifier->getLanguages(LinguistData::getSampleSourceFile('Ruby/foo.rb')));
     }
 
-    public function testClassificationAmbiguousLanguages() : void
+    public function testClassificationAmbiguousLanguages(): void
     {
         // Whitelisting incorrectly classified languages for now
         $failure_whitelist = [

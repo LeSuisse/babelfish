@@ -19,7 +19,7 @@ final class ContentFile implements SourceFile
         $this->content = $content;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -27,7 +27,7 @@ final class ContentFile implements SourceFile
     /**
      * @return string[]
      */
-    public function getLines() : array
+    public function getLines(): array
     {
         return explode("\n", $this->content);
     }

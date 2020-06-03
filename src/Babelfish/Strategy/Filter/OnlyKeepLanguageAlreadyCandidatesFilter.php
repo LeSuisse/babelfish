@@ -13,7 +13,7 @@ class OnlyKeepLanguageAlreadyCandidatesFilter
      *
      * @return Language[]
      */
-    public function filter(array $language_candidates, Language ...$found_languages) : array
+    public function filter(array $language_candidates, Language ...$found_languages): array
     {
         if (empty($language_candidates)) {
             return $found_languages;
