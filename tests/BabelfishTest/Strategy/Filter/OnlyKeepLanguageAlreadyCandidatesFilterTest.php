@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class OnlyKeepLanguageAlreadyCandidatesFilterTest extends TestCase
 {
-    public function testFoundLanguagesNotAlreadyCandidatesAreFilteredOut() : void
+    public function testFoundLanguagesNotAlreadyCandidatesAreFilteredOut(): void
     {
         $language_candidate_a = $this->createMock(Language::class);
         /** @psalm-suppress InternalMethod */
@@ -40,7 +40,7 @@ class OnlyKeepLanguageAlreadyCandidatesFilterTest extends TestCase
         $this->assertSame([$language_found_a, $language_found_b], $filtered_languages);
     }
 
-    public function testAllFoundLanguagesAreReturnedWhenNoCandidate() : void
+    public function testAllFoundLanguagesAreReturnedWhenNoCandidate(): void
     {
         $language_found_a = $this->createMock(Language::class);
         /** @psalm-suppress InternalMethod */

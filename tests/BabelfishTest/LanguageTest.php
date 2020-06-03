@@ -12,7 +12,7 @@ class LanguageTest extends TestCase
     /**
      * @dataProvider aliasesProvider
      */
-    public function testFindByAlias(?string $expected_language_name, string $alias) : void
+    public function testFindByAlias(?string $expected_language_name, string $alias): void
     {
         $language = Language::findByAlias($alias);
         $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
@@ -21,7 +21,7 @@ class LanguageTest extends TestCase
     /**
      * @dataProvider filenamesProvider
      */
-    public function testFindByFilename(?string $expected_language_name, string $filename) : void
+    public function testFindByFilename(?string $expected_language_name, string $filename): void
     {
         $language = Language::findByFilename($filename);
         $this->assertSame($expected_language_name, $language !== null ? $language->getName() : null);
@@ -32,7 +32,7 @@ class LanguageTest extends TestCase
      *
      * @dataProvider interpretersProvider
      */
-    public function testFindByInterpreter(array $expected_languages_name, string $interpreter) : void
+    public function testFindByInterpreter(array $expected_languages_name, string $interpreter): void
     {
         $languages = Language::findLanguagesByInterpreter($interpreter);
         $names     = [];
@@ -48,7 +48,7 @@ class LanguageTest extends TestCase
      *
      * @dataProvider extensionsProvider
      */
-    public function testFindLanguagesByExtension(array $expected_languages_name, string $extension) : void
+    public function testFindLanguagesByExtension(array $expected_languages_name, string $extension): void
     {
         $languages = Language::findLanguagesByExtension($extension);
         $names     = [];
@@ -63,7 +63,7 @@ class LanguageTest extends TestCase
      * @psalm-return array<array{?string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function aliasesProvider() : array
+    public function aliasesProvider(): array
     {
         return [
             ['ASP', 'asp'],
@@ -136,7 +136,7 @@ class LanguageTest extends TestCase
      * @psalm-return array<array{?string, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function filenamesProvider() : array
+    public function filenamesProvider(): array
     {
         return [
             ['Shell', 'PKGBUILD'],
@@ -158,7 +158,7 @@ class LanguageTest extends TestCase
      * @psalm-return array<array{string[], string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function interpretersProvider() : array
+    public function interpretersProvider(): array
     {
         return [
             [['Ruby'], 'ruby'],
@@ -179,7 +179,7 @@ class LanguageTest extends TestCase
      * @psalm-return array<array{string[], string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function extensionsProvider() : array
+    public function extensionsProvider(): array
     {
         return [
             [['Ruby'], '.rb'],

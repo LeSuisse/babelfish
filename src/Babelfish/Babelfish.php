@@ -16,6 +16,7 @@ use Babelfish\Strategy\Shebang;
 use Babelfish\Strategy\Strategy;
 use Babelfish\Strategy\Tokenizer\Tokenizer;
 use Babelfish\Strategy\XML;
+
 use function count;
 
 class Babelfish
@@ -28,7 +29,7 @@ class Babelfish
         $this->strategies = $strategies;
     }
 
-    public static function getWithDefaultStrategies() : self
+    public static function getWithDefaultStrategies(): self
     {
         $only_keep_language_already_candidate_filter = new OnlyKeepLanguageAlreadyCandidatesFilter();
 
@@ -43,7 +44,7 @@ class Babelfish
         );
     }
 
-    public function getLanguage(SourceFile $file) : ?Language
+    public function getLanguage(SourceFile $file): ?Language
     {
         $candidates = [];
         foreach ($this->strategies as $strategy) {

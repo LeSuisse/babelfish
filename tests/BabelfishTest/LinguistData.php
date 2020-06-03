@@ -6,6 +6,7 @@ namespace BabelfishTest;
 
 use Babelfish\File\ContentFile;
 use Babelfish\File\SourceFile;
+
 use function basename;
 use function file_get_contents;
 use function glob;
@@ -13,7 +14,7 @@ use function is_link;
 
 final class LinguistData
 {
-    public static function getFixtureSourceFile(string $fixture_path) : SourceFile
+    public static function getFixtureSourceFile(string $fixture_path): SourceFile
     {
         return new ContentFile(
             basename($fixture_path),
@@ -21,7 +22,7 @@ final class LinguistData
         );
     }
 
-    public static function getSampleSourceFile(string $sample_path) : SourceFile
+    public static function getSampleSourceFile(string $sample_path): SourceFile
     {
         return new ContentFile(
             basename($sample_path),
@@ -32,7 +33,7 @@ final class LinguistData
     /**
      * @return SourceFile[]
      */
-    public static function getLanguageSampleSourceFiles(string $language_name, string $glob_pattern_file) : array
+    public static function getLanguageSampleSourceFiles(string $language_name, string $glob_pattern_file): array
     {
         $samples = [];
 

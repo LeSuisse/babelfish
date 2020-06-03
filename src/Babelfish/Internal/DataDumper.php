@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Babelfish\Internal;
 
 use RuntimeException;
+
 use function dirname;
 use function escapeshellarg;
 use function exec;
@@ -25,7 +26,7 @@ class DataDumper
         $this->dumps = $dumps;
     }
 
-    public function dump(string $linguist_repo_path) : void
+    public function dump(string $linguist_repo_path): void
     {
         $commit_reference = $this->getCommitReference($linguist_repo_path);
 
@@ -40,7 +41,7 @@ class DataDumper
     /**
      * @param mixed[] $exported_values
      */
-    private function save(array $exported_values, string $output_file, string $linguist_commit_reference) : void
+    private function save(array $exported_values, string $output_file, string $linguist_commit_reference): void
     {
         $marshalled_value = var_export($exported_values, true);
 
@@ -65,7 +66,7 @@ EOT
         }
     }
 
-    private function getCommitReference(string $linguist_repo_path) : string
+    private function getCommitReference(string $linguist_repo_path): string
     {
         $commit_reference = exec('git -C ' . escapeshellarg($linguist_repo_path) . ' rev-parse HEAD');
 

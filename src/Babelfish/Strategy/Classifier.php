@@ -8,6 +8,7 @@ use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Classification\Database;
 use Babelfish\Strategy\Tokenizer\Tokenizer;
+
 use function key;
 use function log;
 use function reset;
@@ -32,7 +33,7 @@ final class Classifier implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         if (empty($language_candidates)) {
             return [];
@@ -54,7 +55,7 @@ final class Classifier implements Strategy
         return [$language_candidates_by_name[key($sorted_language_names)]];
     }
 
-    private function getDataToAnalyze(SourceFile $file) : string
+    private function getDataToAnalyze(SourceFile $file): string
     {
         $data = '';
         foreach ($file->getLines() as $line) {
@@ -74,7 +75,7 @@ final class Classifier implements Strategy
      *
      * @psalm-return array<string, float>
      */
-    private function classify(string $data, array $language_names) : array
+    private function classify(string $data, array $language_names): array
     {
         $tokens = $this->tokenizer->extractTokens($data);
         $scores = [];
@@ -86,7 +87,7 @@ final class Classifier implements Strategy
 
         uasort(
             $scores,
-            static function (float $a, float $b) : int {
+            static function (float $a, float $b): int {
                 return ($a <=> $b) * -1;
             }
         );
@@ -98,7 +99,7 @@ final class Classifier implements Strategy
     /**
      * @param string[] $tokens
      */
-    private function getTokensProbability(string $language_name, array $tokens) : float
+    private function getTokensProbability(string $language_name, array $tokens): float
     {
         $sum = 0;
 
@@ -109,7 +110,7 @@ final class Classifier implements Strategy
         return $sum;
     }
 
-    private function getTokenProbability(string $language_name, string $token) : float
+    private function getTokenProbability(string $language_name, string $token): float
     {
         $token_nb = $this->database->getTokens($language_name, $token);
 
@@ -120,7 +121,7 @@ final class Classifier implements Strategy
         return $token_nb / $this->database->getLanguageTokens($language_name);
     }
 
-    private function getLanguageProbability(string $language_name) : float
+    private function getLanguageProbability(string $language_name): float
     {
         return log($this->database->getLanguage($language_name) / $this->database->getTotalLanguages());
     }

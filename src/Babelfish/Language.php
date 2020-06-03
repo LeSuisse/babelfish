@@ -17,12 +17,12 @@ class Language
         $this->name = $name;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public static function findByAlias(string $alias) : ?self
+    public static function findByAlias(string $alias): ?self
     {
         static $languages_indexed_by_alias = null;
         if ($languages_indexed_by_alias === null) {
@@ -40,7 +40,7 @@ class Language
         return new self($language_name);
     }
 
-    public static function findByFilename(string $filename) : ?self
+    public static function findByFilename(string $filename): ?self
     {
         static $languages_indexed_by_filename = null;
         if ($languages_indexed_by_filename === null) {
@@ -61,7 +61,7 @@ class Language
     /**
      * @return self[]
      */
-    public static function findLanguagesByInterpreter(string $interpreter) : array
+    public static function findLanguagesByInterpreter(string $interpreter): array
     {
         static $languages_indexed_by_interpreter = null;
         if ($languages_indexed_by_interpreter === null) {
@@ -82,7 +82,7 @@ class Language
     /**
      * @return self[]
      */
-    public static function findLanguagesByExtension(string $extension) : array
+    public static function findLanguagesByExtension(string $extension): array
     {
         static $languages_indexed_by_extension = null;
         if ($languages_indexed_by_extension === null) {

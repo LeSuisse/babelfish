@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class FilenameTest extends TestCase
 {
-    public function testSourceFileWithAKnownFilename() : void
+    public function testSourceFileWithAKnownFilename(): void
     {
         $source_file = $this->createMock(SourceFile::class);
         /** @psalm-suppress InternalMethod */
@@ -21,7 +21,7 @@ class FilenameTest extends TestCase
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) : array {
+            static function (array $language_candidates, Language ...$found_languages): array {
                 return $found_languages;
             }
         );
@@ -33,7 +33,7 @@ class FilenameTest extends TestCase
         $this->assertSame('JSON', $languages[0]->getName());
     }
 
-    public function testSourceFileWithAnUnknownFilename() : void
+    public function testSourceFileWithAnUnknownFilename(): void
     {
         $source_file = $this->createMock(SourceFile::class);
         /** @psalm-suppress InternalMethod */

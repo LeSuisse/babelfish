@@ -31,19 +31,19 @@ final class Tokenizer
     /**
      * @return string[]
      */
-    public function extractTokens(string $content) : array
+    public function extractTokens(string $content): array
     {
         $tokens = new class {
             /** @var string[] $storage */
             private $storage = [];
 
-            public function append(string $token) : void
+            public function append(string $token): void
             {
                 $this->storage[] = $token;
             }
 
             /** @return string[] */
-            public function getStorage() : array
+            public function getStorage(): array
             {
                 return $this->storage;
             }
@@ -51,7 +51,7 @@ final class Tokenizer
         // Shebang
         $content = (string) preg_replace_callback(
             self::REGEX_SHEBANG_WITH_ENV,
-            static function (array $matches) use ($tokens) : string {
+            static function (array $matches) use ($tokens): string {
                 /** @var string[] $matches */
                 $match = strrchr($matches[0], ' ');
                 if ($match === false) {
@@ -68,7 +68,7 @@ final class Tokenizer
         );
         $content = (string) preg_replace_callback(
             self::REGEX_SHEBANG,
-            static function (array $matches) use ($tokens) : string {
+            static function (array $matches) use ($tokens): string {
                 /** @var string[] $matches */
                 $match = strrchr($matches[0], '/');
                 if ($match === false) {
@@ -89,7 +89,7 @@ final class Tokenizer
         // SGML
         $content = (string) preg_replace_callback(
             self::REGEX_SGML,
-            static function (array $matches) use ($tokens) : string {
+            static function (array $matches) use ($tokens): string {
                 if (preg_match(self::REGEX_SGML_COMMENT, (string) $matches[0]) === 1) {
                     return ' ';
                 }
@@ -99,13 +99,15 @@ final class Tokenizer
                 // Attributes
                 preg_replace_callback(
                     self::REGEX_SGML_ATTRIBUTE,
-                    static function (array $matches) use ($tokens) : string {
+                    static function (array $matches) use ($tokens): string {
                         if ($matches[1] !== '') {
                             $tokens->append((string) $matches[1]);
                         }
 
-                        if (isset($matches[2]) &&
-                            preg_match(self::REGEX_SGML_LONE_ATTRIBUTE, (string) $matches[2], $lone_attribute) === 1) {
+                        if (
+                            isset($matches[2]) &&
+                            preg_match(self::REGEX_SGML_LONE_ATTRIBUTE, (string) $matches[2], $lone_attribute) === 1
+                        ) {
                             $tokens->append($lone_attribute[0]);
                         }
 
@@ -130,7 +132,7 @@ final class Tokenizer
         );
 
         // Punctuations
-        $match_and_replace_callback = static function (array $matches) use ($tokens) : string {
+        $match_and_replace_callback = static function (array $matches) use ($tokens): string {
             $tokens->append((string) $matches[0]);
 
             return ' ';
@@ -144,7 +146,7 @@ final class Tokenizer
         // Skip literal number
         $content = (string) preg_replace_callback(
             self::REGEX_LITERAL_NUMBER,
-            static function (array $matches) : string {
+            static function (array $matches): string {
                 /** @var string[] $matches */
                 return $matches[1] . ' ';
             },

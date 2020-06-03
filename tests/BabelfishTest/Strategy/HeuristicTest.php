@@ -15,7 +15,7 @@ class HeuristicTest extends TestCase
 {
     private const INCORRECT_HEURISTIC = ['cocoa_monitor.m' => false];
 
-    public function testNoMatch() : void
+    public function testNoMatch(): void
     {
         $heuristic = new Heuristic();
         $languages = $heuristic->getLanguages(
@@ -30,7 +30,7 @@ class HeuristicTest extends TestCase
      *
      * @dataProvider heuristicDataProvider
      */
-    public function testHeuristic(SourceFile $file, array $language_candidate_names) : void
+    public function testHeuristic(SourceFile $file, array $language_candidate_names): void
     {
         if (isset(self::INCORRECT_HEURISTIC[$file->getName()])) {
             $this->markTestSkipped();
@@ -53,7 +53,7 @@ class HeuristicTest extends TestCase
      * @psalm-return array<array{SourceFile, string[]}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function heuristicDataProvider() : array
+    public function heuristicDataProvider(): array
     {
         $raw_data = [
             'as' => [
@@ -344,7 +344,7 @@ class HeuristicTest extends TestCase
     /**
      * @dataProvider ambiguousFileDataProvider
      */
-    public function testAmbiguousFileAreNotWronglyDetected(SourceFile $file, string $language_candidate_name) : void
+    public function testAmbiguousFileAreNotWronglyDetected(SourceFile $file, string $language_candidate_name): void
     {
         $heuristic          = new Heuristic();
         $language_candidate = Language::findByAlias($language_candidate_name);
@@ -356,7 +356,7 @@ class HeuristicTest extends TestCase
      * @psalm-return array<array{SourceFile, string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function ambiguousFileDataProvider() : array
+    public function ambiguousFileDataProvider(): array
     {
         $files_to_provide = [];
         /** @var array<string, string[]> $languages */
@@ -375,7 +375,7 @@ class HeuristicTest extends TestCase
      * @psalm-return array<string, array<string, array<string, true>>>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    private function getAmbiguousFile() : array
+    private function getAmbiguousFile(): array
     {
         return [
             'm' => ['Mathematica' => ['Problem12.m' => true]],
@@ -385,7 +385,7 @@ class HeuristicTest extends TestCase
         ];
     }
 
-    public function testNoLanguagesCanBeDetectedByHeuristicWithoutExtension() : void
+    public function testNoLanguagesCanBeDetectedByHeuristicWithoutExtension(): void
     {
         $heuristic = new Heuristic();
         $languages = $heuristic->getLanguages(new ContentFile('no_extension', ''));

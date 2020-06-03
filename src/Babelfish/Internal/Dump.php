@@ -19,12 +19,12 @@ class Dump
         $this->generator   = $generator;
     }
 
-    public function getOutputPath() : string
+    public function getOutputPath(): string
     {
         return $this->output_path;
     }
 
-    public function getGenerator() : Generator
+    public function getGenerator(): Generator
     {
         return $this->generator;
     }

@@ -21,7 +21,7 @@ final class Filename implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         $language = Language::findByFilename($file->getName());
 

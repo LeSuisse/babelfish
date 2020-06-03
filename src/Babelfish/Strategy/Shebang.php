@@ -7,6 +7,7 @@ namespace Babelfish\Strategy;
 use Babelfish\File\SourceFile;
 use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
+
 use function array_slice;
 use function array_values;
 use function explode;
@@ -29,7 +30,7 @@ final class Shebang implements Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array
     {
         $lines = $file->getLines();
         if (empty($lines)) {
@@ -61,7 +62,8 @@ final class Shebang implements Strategy
         $script = preg_replace('/(\.\d+)$/', '', $script);
         $script = preg_replace('/^#!\s*/', '', $script);
 
-        if ($script === 'sh' &&
+        if (
+            $script === 'sh' &&
             preg_match(
                 '/exec (\w+).+\$0.+\$@/',
                 $this->getHeaderForMultilineExec($file),
@@ -78,7 +80,7 @@ final class Shebang implements Strategy
         return $this->filter->filter($language_candidates, ...Language::findLanguagesByInterpreter($script));
     }
 
-    private function getHeaderForMultilineExec(SourceFile $file) : string
+    private function getHeaderForMultilineExec(SourceFile $file): string
     {
         return implode("\n", array_slice($file->getLines(), 0, self::SEARCH_SCOPE_FOR_MULTILINE_EXEC));
     }

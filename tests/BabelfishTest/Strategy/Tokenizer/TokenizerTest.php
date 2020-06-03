@@ -7,6 +7,7 @@ namespace BabelfishTest\Strategy\Tokenizer;
 use Babelfish\Strategy\Tokenizer\Tokenizer;
 use BabelfishTest\LinguistData;
 use PHPUnit\Framework\TestCase;
+
 use function array_slice;
 use function implode;
 
@@ -17,7 +18,7 @@ class TokenizerTest extends TestCase
      *
      * @dataProvider tokensDataProvider
      */
-    public function testTokenization(string $input, array $expected, bool $only_first_key = false) : void
+    public function testTokenization(string $input, array $expected, bool $only_first_key = false): void
     {
         $tokenizer = new Tokenizer();
 
@@ -33,7 +34,7 @@ class TokenizerTest extends TestCase
      * @psalm-return array<array{string, string[]}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function tokensDataProvider() : array
+    public function tokensDataProvider(): array
     {
         return [
             ['print ""', ['print']],

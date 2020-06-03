@@ -12,5 +12,5 @@ interface Strategy
     /**
      * @return Language[]
      */
-    public function getLanguages(SourceFile $file, Language ...$language_candidates) : array;
+    public function getLanguages(SourceFile $file, Language ...$language_candidates): array;
 }

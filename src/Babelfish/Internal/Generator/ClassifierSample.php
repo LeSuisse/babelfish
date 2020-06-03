@@ -10,6 +10,7 @@ use Babelfish\Strategy\Tokenizer\Tokenizer;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
+
 use function basename;
 use function dirname;
 
@@ -20,7 +21,7 @@ final class ClassifierSample implements Generator
     /**
      * @return mixed[]
      */
-    public function generate(string $linguist_repository_path) : array
+    public function generate(string $linguist_repository_path): array
     {
         $samples = [];
 

@@ -9,6 +9,7 @@ use Babelfish\Language;
 use Babelfish\Strategy\Filter\OnlyKeepLanguageAlreadyCandidatesFilter;
 use Babelfish\Strategy\Shebang;
 use PHPUnit\Framework\TestCase;
+
 use function array_map;
 use function explode;
 
@@ -19,7 +20,7 @@ class ShebangTest extends TestCase
      *
      * @dataProvider shebangFileContentProvider
      */
-    public function testSourceFileWithShebang(array $expected_language_names, string $file_content) : void
+    public function testSourceFileWithShebang(array $expected_language_names, string $file_content): void
     {
         $file = $this->createMock(SourceFile::class);
         /** @psalm-suppress InternalMethod */
@@ -28,7 +29,7 @@ class ShebangTest extends TestCase
         $pass_out_filter = $this->createMock(OnlyKeepLanguageAlreadyCandidatesFilter::class);
         /** @psalm-suppress InternalMethod */
         $pass_out_filter->method('filter')->willReturnCallback(
-            static function (array $language_candidates, Language ...$found_languages) : array {
+            static function (array $language_candidates, Language ...$found_languages): array {
                 return $found_languages;
             }
         );
@@ -40,7 +41,7 @@ class ShebangTest extends TestCase
         $this->assertSame(
             $expected_language_names,
             array_map(
-                static function (Language $language) : string {
+                static function (Language $language): string {
                     return $language->getName();
                 },
                 $languages
@@ -48,7 +49,7 @@ class ShebangTest extends TestCase
         );
     }
 
-    public function testAFileWithoutAnyLinesDoesNotFindAnyLanguage() : void
+    public function testAFileWithoutAnyLinesDoesNotFindAnyLanguage(): void
     {
         $file = $this->createMock(SourceFile::class);
         /** @psalm-suppress InternalMethod */
@@ -66,7 +67,7 @@ class ShebangTest extends TestCase
      * @psalm-return array<array{string[], string}>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification
      */
-    public function shebangFileContentProvider() : array
+    public function shebangFileContentProvider(): array
     {
         return [
             [[], ''],

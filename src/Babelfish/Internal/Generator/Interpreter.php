@@ -26,7 +26,7 @@ final class Interpreter implements Generator
      *
      * @psalm-return array<string, string[]>
      */
-    public function generate(string $linguist_repo_path) : array
+    public function generate(string $linguist_repo_path): array
     {
         /** @psalm-var array<string, array<string, string[]>> $languages */
         $languages = $this->parser->getParsedContent(
