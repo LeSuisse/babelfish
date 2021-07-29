@@ -3326,25 +3326,25 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.18.1",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "d87d5766cbf48d72388a9f6b85f280c8ad51f981"
+                "reference": "1100343ed1a92e3a38f9ae122fc0eb21602547be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/d87d5766cbf48d72388a9f6b85f280c8ad51f981",
-                "reference": "d87d5766cbf48d72388a9f6b85f280c8ad51f981",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/1100343ed1a92e3a38f9ae122fc0eb21602547be",
+                "reference": "1100343ed1a92e3a38f9ae122fc0eb21602547be",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.8"
+                "php": ">=7.1"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-main": "1.23-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -3402,7 +3402,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-14T12:35:20+00:00"
+            "time": "2021-07-28T13:41:28+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -3567,23 +3567,22 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v5.3.4",
+            "version": "v5.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "90909bd7352ae57411a93fcd67b09e6199340547"
+                "reference": "4500fe63dc9c6ffc32d3b1cb0448c329f9c814b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/90909bd7352ae57411a93fcd67b09e6199340547",
-                "reference": "90909bd7352ae57411a93fcd67b09e6199340547",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/4500fe63dc9c6ffc32d3b1cb0448c329f9c814b7",
+                "reference": "4500fe63dc9c6ffc32d3b1cb0448c329f9c814b7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/deprecation-contracts": "^2.1",
-                "symfony/polyfill-ctype": "~1.8",
-                "symfony/polyfill-php80": "^1.16"
+                "symfony/polyfill-ctype": "~1.8"
             },
             "conflict": {
                 "symfony/console": "<4.4"
@@ -3636,7 +3635,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-21T12:40:44+00:00"
+            "time": "2021-07-29T06:20:01+00:00"
         },
         {
             "name": "theseer/tokenizer",
