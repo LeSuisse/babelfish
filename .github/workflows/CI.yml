@@ -22,7 +22,7 @@ jobs:
           auth_header="$(git config --local --get http.https://github.com/.extraheader)"
           git submodule sync
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --depth=1
-      - uses: shivammathur/setup-php@2.17.1
+      - uses: shivammathur/setup-php@2.18.0
         with:
           php-version: ${{ matrix.php-versions }}
           extension: mbstring
@@ -43,7 +43,7 @@ jobs:
     name: Code quality
     steps:
       - uses: actions/checkout@v3
-      - uses: shivammathur/setup-php@2.17.1
+      - uses: shivammathur/setup-php@2.18.0
         with:
           php-version: '7.4'
           extension: mbstring
